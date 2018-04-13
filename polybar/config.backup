@@ -1,0 +1,245 @@
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+screenchange-reload = false
+
+[colors]
+background 	= #argb:00000000
+foreground	= #000000
+colour_1	= #707880
+colour_2	= #5F819D
+colour_3	= #CC6666
+gray		= #748093
+
+[bar/laptop]
+monitor = ${env:MONITOR}
+top = true
+width = 100%
+height = 40
+offset-x = 0
+offset-y = 0
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground =  ${colors.foreground}
+
+line-size = 4
+
+padding-left = 3
+padding-right = 3
+
+module-margin-left = 2.5
+module-margin-right = 2.5
+
+font-0 = Overpass:fontformat=opentype:size=18:weight=light;1
+font-1 = FontAwesome:fontformat=truetype:size=12;1
+
+modules-left = i3 xwindow
+modules-center = date
+modules-right = keyboard volume battery wireless-network
+
+tray-position = right
+tray-padding = 5
+tray-offset-y = 0%
+tray-offset-x = 0%
+tray-maxsize = 35
+tray-detached = false
+tray-transparent = false
+tray-color = #1D1F21
+
+#wm-restack = i3
+override-redirect = false
+
+[module/i3]
+type = internal/i3
+
+label-focused = %index%
+label-focused-foreground = ${colors.foreground}
+label-focused-background = argb:003f3f3f
+label-focused-underline = #fba922
+label-visible-underline = #cfcfcf
+label-visible-padding = 1
+label-focused-padding = 2
+label-unfocused-padding = 2
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+pin-workspaces = true
+
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = true
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = true
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = true
+
+; Set the scroll cycle direction
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+[module/xwindow]
+type = internal/xwindow
+
+[module/date]
+type = internal/date
+interval = 5
+
+format = <label>
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.gray}
+
+label = %date%, %time%
+
+date = "%a %B %d"
+#date-alt = "%d-%m-%Y"
+
+#time-alt = "%I:%M %p"
+time = "%H:%M"
+
+[module/volume]
+type = internal/volume
+
+format-muted-background = ${colors.background}
+format-volume-background = ${colors.background}
+format-volume =  <bar-volume>
+#format-volume = <label-volume> <bar-volume>
+label-muted =  Muted
+
+bar-volume-width = 10
+bar-volume-foreground = ${colors.foreground}
+bar-volume-gradient = true
+bar-volume-indicator= ~
+bar-volume-indicator-font = 1
+bar-volume-fill = -
+bar-volume-fill-font = 1
+bar-volume-empty = -
+bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${colors.gray}
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = ⚡ Power
+label-open-background = ${colors.background}
+label-open-foreground = ${colors.foreground}
+label-close = ⚡
+label-close-background = ${colors.background}
+label-close-foreground = ${colors.foreground}
+label-separator = " "
+label-separator-foreground = ${colors.foreground}
+
+menu-0-0 = Reboot
+menu-0-0-exec = shutdown -r now
+menu-0-1 = Power Off
+menu-0-1-exec = shutdown now
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+battery = BAT0
+adapter = AC
+poll-interval = 5
+
+time-format = %H:%M
+
+format-charging =  <label-charging>
+format-discharging =  <label-discharging>
+format-full =  <label-full>
+
+format-charging-foreground = ${colors.foreground}
+format-discharging-foreground = ${colors.foreground}
+format-full-foreground = ${colors.foreground}
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = Full
+
+label-charging-foreground = ${colors.foreground}
+label-discharging-foreground = ${colors.foreground}
+label-full-foreground = ${colors.foreground}
+
+[module/wireless-network]
+type = internal/network
+interface = wlp4s0
+
+interval = 5.0
+accumulate-stats = true
+format-connected =  <label-connected>
+format-connected-foreground = ${colors.foreground}
+format-disconnected =  <label-disconnected>
+
+label-connected = %essid%
+#label-connected = %essid%  %local_ip%
+label-connected-foreground = ${colors.foreground}
+
+label-disconnected = (None)
+label-disconnected-foreground = ${colors.foreground}
+
+[module/vpn]
+type = internal/network
+interface = tun0
+
+interval = 5.0
+accumulate-stats = true
+format-connected = VPN: <label-connected>
+format-connected-foreground = ${colors.colour_1}
+format-disconnected = <label-disconnected>
+
+label-connected = Connected
+label-connected-foreground = ${colors.foreground}
+
+label-disconnected = (None)
+label-disconnected-foreground = ${colors.foreground}
+
+[module/keyboard]
+type = internal/xkeyboard
+format = <label-layout> <label-indicator>
+format-spacing = 0
+
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+; Default: %layout%
+label-layout = %name%
+label-layout-padding = 2
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-indicator = %name%
+label-indicator-padding = 2

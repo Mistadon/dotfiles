@@ -1,0 +1,37 @@
+#include ".Xresources.d/fonts"
+#include ".rofi.theme"
+!ROFI
+rofi.terminal:  urxvt
+rofi.color-enabled: true
+!rofi.color-window: #000000, #000000, #000000
+!rofi.color-normal: #090913, #f8ffff, #090913, #090913, #f8ffff
+!rofi.color-active: argb:f0000000, #268bd2, argb:e0000000, argb:20000000, #fdf6e3
+!rofi.color-urgent: #090913, #dc322f, #090913, #090913, #fdf6e3
+rofi.show-icons:    true
+rofi.sidebar-mode:  true
+rofi.theme: .sidestyle
+
+! Separator style (none, dash, solid)
+rofi.separator-style:                solid
+rofi.lines:	3
+rofi.method:	fuzzy
+
+
+!URXVT
+URxvt.saveLines: 1000
+URxvt.scrollBar: false
+URxvt.foreground: white
+URxvt.depth: 32
+URxvt.background: rgba:0000/0000/0000/b000
+URxvt.secondaryScroll: true
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 1
+URxvt.tabbed.saveLines: 1000
+!URxvt.tabbed.tabbar-fg: 3
+!URxvt.tabbed.tabbar-bg: 0
+!URxvt.tabbed.tab-fg: 0
+!URxvt.tabbed.tab-bg: 1
+!URxvt.tabbed.secondaryScroll: true
+*utf8:1
+
