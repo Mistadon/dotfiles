@@ -40,5 +40,5 @@ xsetroot -cursor_name left_ptr
 (cd /home/moritz/.screenlayout && exec find -mindepth 2 -maxdepth 2 -type f -iname screens -execdir bash -c 'cmp --silent ./screens ../screens && ./layout.sh' \;)
 
 # Finally execute i3
-#exec i3
-exec bspwm
+exec i3 --shmlog-size=26214400
+#exec bspwm

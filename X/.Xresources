@@ -1,39 +1,26 @@
-#include ".rofi.theme"
 !ROFI
-rofi.terminal:  urxvt
-rofi.color-enabled: true
-!rofi.color-window: #000000, #000000, #000000
-!rofi.color-normal: #090913, #f8ffff, #090913, #090913, #f8ffff
-!rofi.color-active: argb:f0000000, #268bd2, argb:e0000000, argb:20000000, #fdf6e3
-!rofi.color-urgent: #090913, #dc322f, #090913, #090913, #fdf6e3
-rofi.show-icons:    true
-rofi.sidebar-mode:  true
-rofi.theme: .sidestyle
-
-! Separator style (none, dash, solid)
-rofi.separator-style:                solid
-rofi.lines:	3
-rofi.method:	fuzzy
-
-
-!URXVT
-URxvt.saveLines: 1000
-URxvt.scrollBar: false
-URxvt.foreground: white
-URxvt.depth: 32
-URxvt.background: rgba:0000/0000/0000/b000
-URxvt.secondaryScroll: true
-URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: firefox
-URxvt.matcher.button: 1
-URxvt.tabbed.saveLines: 1000
-!URxvt.tabbed.tabbar-fg: 3
-!URxvt.tabbed.tabbar-bg: 0
-!URxvt.tabbed.tab-fg: 0
-!URxvt.tabbed.tab-bg: 1
-!URxvt.tabbed.secondaryScroll: true
-*utf8:1
-
-rofi.font:	Overpass 20
-URxvt.font:	xft:Hack:size=10:antialiasing=true
-
+!rofi.terminal:  termite
+!rofi.color-enabled: true
+!rofi.show-icons:    true
+!rofi.sidebar-mode:  true
+!rofi.separator-style: solid
+!rofi.lines:	3
+!rofi.method:	fuzzy
+!rofi.font:	Overpass 20
+rofi.color-window: argb:EE373B47, #373B47
+rofi.color-normal: argb:00373B47, #737783, argb:00373B47, argb:00373B47, #f9f9f9
+rofi.color-urgent: argb:00373B47, #cc6666, argb:e54b5160, argb:00373B47, #f9f9f9
+rofi.color-active: argb:00373B47, #65acff, argb:e44b5160, argb:00373B47, #f9f9f9
+rofi.width: 35
+rofi.lines: 16
+rofi.font: Overpass 15
+rofi.bw: 0
+rofi.padding: 50
+rofi.line-margin: 5
+rofi.eh: 1
+rofi.sidebar-mode: true
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+rofi.show-icons: true
+rofi.location: 0
+rofi.modi: window,run,drun

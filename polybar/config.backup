@@ -1,245 +1,199 @@
-[settings]
-throttle-output = 5
-throttle-output-for = 10
-throttle-input-for = 30
-screenchange-reload = false
-
-[colors]
-background 	= #argb:00000000
-foreground	= #000000
-colour_1	= #707880
-colour_2	= #5F819D
-colour_3	= #CC6666
-gray		= #748093
-
-[bar/laptop]
-monitor = ${env:MONITOR}
-top = true
+[bar/top]
 width = 100%
-height = 40
+height = 35 
 offset-x = 0
-offset-y = 0
-radius = 0.0
-fixed-center = true
+offset-y = -1 
+;bottom = true
 
-background = ${colors.background}
-foreground =  ${colors.foreground}
+background = #5a000000
+foreground = #eee
 
-line-size = 4
+underline-size = 2
+underline-color = #eee
 
-padding-left = 3
-padding-right = 3
+spacing = 1
+padding-left = 0
+padding-right = 0
+module-margin-left = 0 
+module-margin-right = 0
 
-module-margin-left = 2.5
-module-margin-right = 2.5
+font-0 = Overpass:pixelsize=17;1
+font-1 = FontAwesome:size=14;3
+font-2 = siji:pixelsize=10;0
 
-font-0 = Overpass:fontformat=opentype:size=18:weight=light;1
-font-1 = FontAwesome:fontformat=truetype:size=12;1
-
-modules-left = i3 xwindow
-modules-center = date
-modules-right = keyboard volume battery wireless-network
+modules-left = bspwm xwindow
+modules-center = date 
+modules-right = keyboard battery volume wireless-network
 
 tray-position = right
-tray-padding = 5
-tray-offset-y = 0%
-tray-offset-x = 0%
-tray-maxsize = 35
-tray-detached = false
-tray-transparent = false
-tray-color = #1D1F21
+tray-padding = 10
+tray-background = #5a000000
+tray-color = #5a000000
+tray-transparent = true
 
-#wm-restack = i3
-override-redirect = false
+wm-restack = bspwm
 
-[module/i3]
-type = internal/i3
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
 
-label-focused = %index%
-label-focused-foreground = ${colors.foreground}
-label-focused-background = argb:003f3f3f
-label-focused-underline = #fba922
-label-visible-underline = #cfcfcf
-label-visible-padding = 1
-label-focused-padding = 2
-label-unfocused-padding = 2
+; MODULES
 
-; Only show workspaces defined on the same output as the bar
-;
-; Useful if you want to show monitor specific workspaces
-; on different bars
-;
-; Default: false
-pin-workspaces = true
+[module/bspwm]
+type = internal/bspwm
 
-; This will split the workspace name on ':'
-; Default: false
-strip-wsnumbers = true
+ws-icon-default = 
 
-; Sort the workspaces by index instead of the default
-; sorting that groups the workspaces by output
-; Default: false
-index-sort = true
+format = <label-state> <label-mode>
 
-; Create click handler used to focus workspace
-; Default: true
-enable-click = true
+label-focused = %icon%
+label-focused-background = #88000000
+label-focused-underline= #ddd
+label-focused-padding = 4
 
-; Create scroll handlers used to cycle workspaces
-; Default: true
-enable-scroll = false
+label-occupied = %icon%
+label-occupied-padding = 4
 
-; Wrap around when reaching the first/last workspace
-; Default: true
-wrapping-scroll = true
+label-urgent = %icon%
+label-urgent-padding = 4
 
-; Set the scroll cycle direction
-; Default: true
-reverse-scroll = false
-
-; Use fuzzy (partial) matching on labels when assigning
-; icons to workspaces
-; Example: code;♚ will apply the icon to all workspaces
-; containing 'code' in the label
-; Default: false
-fuzzy-match = true
+label-empty = %icon%
+label-empty-foreground = #44ffffff
+label-empty-padding = 4
 
 [module/xwindow]
 type = internal/xwindow
+label = %title:0:120:...%
+label-padding = 4
 
 [module/date]
 type = internal/date
-interval = 5
 
-format = <label>
-format-prefix-foreground = ${colors.foreground}
-format-underline = ${colors.gray}
+; Seconds to sleep between updates
+interval = 1.0
 
-label = %date%, %time%
+; See "man date" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+date = %a %b %d, 
 
-date = "%a %B %d"
-#date-alt = "%d-%m-%Y"
+; Optional time format
+time = %H:%M
 
-#time-alt = "%I:%M %p"
-time = "%H:%M"
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+date-alt = %A, %d %B %Y
+time-alt = %H:%M:%S
+
+label = %date% %time%
+format =    <label>
+;format-background = #ddffffff
+format-background = #88000000
+;format-foreground = #333
+format-padding = 3
+
+[module/padding]
+type = custom/text
+content = 	 
+content-foreground = #00000000
+content-background = #55000000
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+battery = BAT0
+adapter = AC0
+
+poll-interval = 5
+
+format-charging = <animation-charging>  <label-charging>
+format-discharging = <ramp-capacity>  <label-discharging>
+format-full = <ramp-capacity>  <label-full>
+label-charging = %percentage%
+label-discharging = %percentage%
+label-full = %percentage%
+format-charging-padding = 3
+format-discharging-padding = 3
+format-full-padding = 3
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/backlight]
+type = internal/backlight
+
+card = intel_backlight
+enable-scroll = true
+
+format = <ramp> <label>
+label = %percentage%
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
 
 [module/volume]
 type = internal/volume
 
-format-muted-background = ${colors.background}
-format-volume-background = ${colors.background}
-format-volume =  <bar-volume>
-#format-volume = <label-volume> <bar-volume>
-label-muted =  Muted
+format-volume = <ramp-volume>  <label-volume>
+format-muted = <label-muted>
+label-volume = %percentage%
+label-muted =   muted
+label-muted-foreground = #aaa
+format-volume-padding = 3
+format-muted-padding = 3
 
-bar-volume-width = 10
-bar-volume-foreground = ${colors.foreground}
-bar-volume-gradient = true
-bar-volume-indicator= ~
-bar-volume-indicator-font = 1
-bar-volume-fill = -
-bar-volume-fill-font = 1
-bar-volume-empty = -
-bar-volume-empty-font = 1
-bar-volume-empty-foreground = ${colors.gray}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-headphones-0 = 
 
 [module/powermenu]
 type = custom/menu
 
-format-spacing = 1
+label-open =   
+;label-open-background = #dd0000
+;label-open-foreground = #fff
+label-close = cancel
+;label-close-background = #dd0000
+;label-close-foreground = #fff
+label-open-padding = 4 
+label-close-padding = 3 
 
-label-open = ⚡ Power
-label-open-background = ${colors.background}
-label-open-foreground = ${colors.foreground}
-label-close = ⚡
-label-close-background = ${colors.background}
-label-close-foreground = ${colors.foreground}
-label-separator = " "
-label-separator-foreground = ${colors.foreground}
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-0-padding = 3
+menu-0-1-padding = 3
 
-menu-0-0 = Reboot
-menu-0-0-exec = shutdown -r now
-menu-0-1 = Power Off
-menu-0-1-exec = shutdown now
+menu-1-0 = reboot?  
+menu-1-0-exec = sudo reboot
+menu-1-0-padding = 3
 
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
-[module/battery]
-type = internal/battery
-full-at = 98
-
-battery = BAT0
-adapter = AC
-poll-interval = 5
-
-time-format = %H:%M
-
-format-charging =  <label-charging>
-format-discharging =  <label-discharging>
-format-full =  <label-full>
-
-format-charging-foreground = ${colors.foreground}
-format-discharging-foreground = ${colors.foreground}
-format-full-foreground = ${colors.foreground}
-
-label-charging = %percentage%%
-label-discharging = %percentage%%
-label-full = Full
-
-label-charging-foreground = ${colors.foreground}
-label-discharging-foreground = ${colors.foreground}
-label-full-foreground = ${colors.foreground}
-
-[module/wireless-network]
-type = internal/network
-interface = wlp4s0
-
-interval = 5.0
-accumulate-stats = true
-format-connected =  <label-connected>
-format-connected-foreground = ${colors.foreground}
-format-disconnected =  <label-disconnected>
-
-label-connected = %essid%
-#label-connected = %essid%  %local_ip%
-label-connected-foreground = ${colors.foreground}
-
-label-disconnected = (None)
-label-disconnected-foreground = ${colors.foreground}
-
-[module/vpn]
-type = internal/network
-interface = tun0
-
-interval = 5.0
-accumulate-stats = true
-format-connected = VPN: <label-connected>
-format-connected-foreground = ${colors.colour_1}
-format-disconnected = <label-disconnected>
-
-label-connected = Connected
-label-connected-foreground = ${colors.foreground}
-
-label-disconnected = (None)
-label-disconnected-foreground = ${colors.foreground}
+menu-2-0 = power off?  
+menu-2-0-exec = sudo poweroff
+menu-2-0-padding = 3
 
 [module/keyboard]
 type = internal/xkeyboard
 format = <label-layout> <label-indicator>
 format-spacing = 0
 
-; Available tokens:
-;   %layout%
-;   %name%
-;   %number%
-; Default: %layout%
 label-layout = %name%
 label-layout-padding = 2
 
-; Available tokens:
-;   %name%
-; Default: %name%
 label-indicator = %name%
 label-indicator-padding = 2
