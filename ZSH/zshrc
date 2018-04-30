@@ -1,30 +1,10 @@
-# Folders
-ZSH=/usr/share/oh-my-zsh/
-ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+# ################################ #
+# Sourced by .zshrc from oh-my-zsh #
+# ################################ #
 
 # Environment variables
 export EDITOR='vim'
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
-fi
-
-# Theme
-ZSH_THEME="bureau"
-
-DISABLE_AUTO_UPDATE="true"
-
-# Autocorrect of commands
-ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
-
-# Plugin folder: ~/.oh-my-zsh/plugins/
-plugins=(git colored-man-pages lol)
-
-source $ZSH/oh-my-zsh.sh
-source /home/moritz/.dotfiles/ZSH/.compinstall
 
 # Aliases
 alias ls='ls --color=auto'
