@@ -1,0 +1,30 @@
+" Latex stuff
+let g:tex_flavor = "latex"
+let g:Tex_DefaultTargetFormat = "pdf"
+let g:Tex_UsePython=0
+
+" Latex custom environments and commands
+let g:Tex_PromptedEnvironments = 'figure,subfigures,tikz,subtikz,table,ltxtable,plot,itemize,enumerate,description'
+let g:Tex_PromptedCommands = 'pageref,cite,label,blankpage,ltxtable'
+
+let g:Tex_Env_tikz = "\\begin{figure}[h]\<CR>%\\centering\<CR>%\\onehalfspacing\<CR>\\begin{tikzpicture}\<CR>\\node[align=center, anchor=south west,inner sep=0] (image) at (0,0) {\\includegraphics[width=<++>]{<++>}}; %Width and file\<CR>\\begin{scope}[x={(image.south east)},y={(image.north west)}]\<CR>\\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1); %Draw help lines\<CR>\<CR>%\\node[anchor=south west, rotate=45] at (0.10,0.10) {<++>}; %45 degree rotated text\<CR>%\\draw [thick,decoration={brace, amplitude=5px}, decorate] (0.00,1.00) -- (1.00,1.00); %Braces with 5px amplitude\<CR>\<CR>\\end{scope}\<CR>\\end{tikzpicture}\<CR>\\caption{<++>}\<CR>\\label{figure:<++>}\<CR>\\end{figure}\<CR><++>"
+
+let g:Tex_Env_figure = "\\begin{figure}[h]\<CR>%\\centering\<CR>%\\onehalfspacing\<CR>\\includegraphics[width=<++>]{<++>} %Width and file\<CR>\\caption{<++>}\<CR>\\label{figure:<++>}\<CR>\\end{figure}\<CR><++>"
+
+let g:Tex_Env_subfigure = "\\begin{figure}[h]\<CR>%\\centering\<CR>%\\onehalfspacing\<CR>\\begin{subfigure}{<++>} %0.5\\textwidth\<CR>\\includegraphics[width=\\linewidth]{<++>} %File\<CR>\\subcaption{<++>}\<CR>\\end{subfigure}%\<CR>\\begin{subfigure}{<++>} %0.5\\textwidth\<CR>\\includegraphics[width=\\linewidth]{<++>} %File\<CR>\\subcaption{<++>}\<CR>\\end{subfigure}\<CR>\\caption{<++>}\<CR>\\label{figure:<++>}\<CR\\end{figure}\<CR><++>"
+
+let g:Tex_Env_subtikz = "\\begin{figure}[h]\<CR>%\\centering\<CR>%\\onehalfspacing\<CR>\\begin{subfigure}{<++>} %0.5\\textwidth\<CR>\\begin{tikzpicture}\<CR>\\node[align=center, anchor=south west,inner sep=0] at (0,0) {\\includegraphics[width=\\linewidth]{<++>}}; %File\<CR>\\begin{scope}[x={(image.south east)},y={(image.north west)}]\<CR>\\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1); %Help lines\<CR>\<CR>%\\node[anchor=south west, rotate=45] at (0.10,0.10) {<++>};\<CR>%\\draw [thick,decoration={brace, amplitude=5px}, decorate] (0.00,1.00) -- (1.00,1.00);\<CR>\<CR>\\end{scope}\<CR>\\end{tikzpicture}\<CR>\\end{subfigure}%\<CR>\\begin{subfigure}{<++>} %0.5\\textwidth\<CR>\\begin{tikzpicture}\<CR>\\node[align=center, anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\linewidth]{<++>}}; %file\<CR>\\begin{scope}[x={(image.south east)},y={(image.north west)}]\<CR>\\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1); %Help lines\<CR>\<CR>%\\node[anchor=south west, rotate=45] at (0.10,0.10) {<++>};\<CR>%\\draw [thick,decoration={brace, amplitude=5px}, decorate] (0.00,1.00) -- (1.00,1.00);\<CR>\<CR>\\end{scope}\<CR>\\end{tikzpicture}\<CR>\\end{subfigure}\<CR>\\caption{<++>}\<CR>\\label{figure:<++>}\<CR>\\end{figure}\<CR><++>"
+
+let g:Tex_Env_table = "\\begin{table}[h]\<CR>%\\centering\<CR>%\\onehalfspacing\<CR>\\begin{tabularx}{\\linewidth}{<++>} %Layout like Xlcr\<CR>\\caption{<++>}\\\\\<CR>\\toprule\<CR><++>\<CR>\\midrule\<CR><++>\<CR>\\bottomrule\<CR>\\label{table:<++>}\<CR>\\end{tabularx}\<CR>\\end{table}\<CR><++>"
+
+let g:Tex_Env_ltxtable = "\\begin{longtable}{<++>} %Layout like lrcX\<CR>% First header\<CR>\\caption{<++>}%\<CR>\\label{table:<++>}\\\\\<CR>\\toprule\<CR><++> \\\\ %Column headings\<CR>\\midrule\<CR>\\endfirsthead\<CR>% Consequent headers\<CR>\\caption{Continued from previous page}\\\\\<CR>\\toprule\<CR><++> \\\\ %Column headings\<CR>\\midrule\<CR>\\endhead\<CR>% Footers of unfinished table\<CR>Continued on next page\\\\\<CR>\\endfoot\<CR>% Last footer\<CR>\\bottomrule\<CR>\\endlastfoot\<CR>%Data\<CR><++> \<CR>\\end{longtable}\<CR>"
+
+let g:Tex_Env_plot = "\\begin{figure}[h]\<CR>\\input{<++>}\<CR>%\\vspace*{1cm}\<CR>\\caption{<++>}\<CR>\\label{plot:<++>}\<CR>\\end{figure}\<CR><++>"
+
+let g:Tex_Env_itemize = "\\begin{itemize}\<CR>\\item <++>\<CR>\\end{itemize}\<CR><++>"
+let g:Tex_Env_enumerate = "\\begin{enumerate}\<CR>\\item <++>\<CR>\\end{enumerate}\<CR><++>"
+let g:Tex_Env_description = "\\begin{description}\<CR>\\item [<++>] <++>\<CR>\\end{description}\<CR><++>"
+
+let g:Tex_Com_ltxtable = "\\LTXtable{\\textwidth}{tables/<++>.tex}\<CR><++>"
+
+let g:Tex_Com_nobond = "([<++>]!\\nobond\\scriptstyle\\<++>)<++>"
