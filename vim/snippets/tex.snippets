@@ -1,0 +1,146 @@
+snippet tikz "TikZ figure"
+	\\begin{figure}[h]
+		%\\centering
+		%\\onehalfspacing
+		\\begin{tikzpicture}
+			\\node[align=center, anchor=south west,inner sep=0] (image) at (0,0) {\\includegraphics[width=${1:\\figwidth}]{${2:path}}};
+
+			\\begin{scope}[x={(image.south east)},y={(image.north west)}]
+			\\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1); %Draw help lines
+	
+			%\\node[anchor=south west, rotate=45] at (0.10,0.10) {${3:Text}};
+			%\\draw [thick,decoration={brace, amplitude=5px}, decorate] (0.00,1.00) -- (1.00,1.00); %Braces with 5px amplitude
+	
+			\\end{scope}
+	
+		\\end{tikzpicture}
+		\\caption{${4:Caption}}
+		\\label{figure:${5:Label}}
+	\\end{figure}
+endsnippet
+
+snippet env
+	\\begin{${1:enumerate}}
+    	$0
+	\\end{$1}
+endsnippet
+
+snippet figure
+	\\begin{figure}[h]
+		%\\centering
+		%\\onehalfspacing
+		\\includegraphics[width=${1:\\figwidth}]{${2:path}} %Width and file
+		\\caption{${4:Caption}}
+		\\label{figure:${5:Label}}
+	\\end{figure}
+endsnippet
+
+snippet subfigure 
+	\\begin{figure}[h]
+		%\\centering
+		%\\onehalfspacing
+		\\begin{subfigure}{${1:0.5\\textwidth}}
+			\\includegraphics[width=\\linewidth]{${2:File}}
+			\\subcaption{${3:Subcaption}}
+		\\end{subfigure}%
+		\\begin{subfigure}{$1}
+			\\includegraphics[width=\\linewidth]{${4:File}}
+			\\subcaption{${5:Subcaption}}
+		\\end{subfigure}
+		\\caption{${6:Caption}}
+		\\label{figure:${7:Label}}
+	\\end{figure}
+endsnippet
+
+snippet subtikz
+	\\begin{figure}[h]
+		%\\centering
+		%\\onehalfspacing
+		\\begin{subfigure}{${1:0.5\\textwidth}
+			\\begin{tikzpicture}
+				\\node[align=center, anchor=south west,inner sep=0] at (0,0) {\\includegraphics[width=\\linewidth]{${2:File}}};
+				\\begin{scope}[x={(image.south east)},y={(image.north west)}]
+					\\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1); %Help lines
+	
+					%\\node[anchor=south west, rotate=45] at (0.10,0.10) {${3:Text}};
+					%\\draw [thick,decoration={brace, amplitude=5px}, decorate] (0.00,1.00) -- (1.00,1.00);
+
+				\\end{scope}
+			\\end{tikzpicture}
+		\\end{subfigure}%
+		\\begin{subfigure}{${} %0.5\\textwidth
+			\\begin{tikzpicture}
+				\\node[align=center, anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=\linewidth]{${4:File}}};
+				\\begin{scope}[x={(image.south east)},y={(image.north west)}]
+					\\draw[help lines,xstep=.1,ystep=.1] (0,0) grid (1,1); %Help lines
+
+					%\\node[anchor=south west, rotate=45] at (0.10,0.10) {${5:Text}};
+					%\\draw [thick,decoration={brace, amplitude=5px}, decorate] (0.00,1.00) -- (1.00,1.00);
+
+				\\end{scope}
+			\\end{tikzpicture}
+		\\end{subfigure}
+		\\caption{${6:Caption}}
+		\\label{figure:${7:Label}}
+	\\end{figure}
+endsnippet
+
+snippet table
+	\\begin{table}[h]
+		%\\centering
+		%\\onehalfspacing
+		\\begin{tabularx}{\\linewidth}{${1:X l c r}}
+			\\caption{${2:Caption}}
+			\\toprule
+			${3:Headers}
+			\\midrule
+			${4:Data}
+			\\bottomrule
+			\\label{table:${5:Label}}
+		\\end{tabularx}
+		\\caption{${6:Caption}}
+	\\end{table}
+endsnippet
+
+snippet longtable
+	\\begin{longtable}{${1:X l c r}}
+		% First header
+		\\caption{${2:Caption}}%
+		\\label{table:${3:Label}}
+		\\toprule
+		${4:Headings} %Column headings
+		\\midrule
+		\\endfirsthead
+		% Consequent headers
+		\\caption{Continued from previous page}\\\\
+		\\toprule
+		$4 %Column headings
+		\\midrule
+		\\endhead
+		% Footers of unfinished table
+			Continued on next page\\\\
+		\\endfoot
+		% Last footer
+		\\bottomrule
+		\\endlastfoot
+		%Data
+		${5:Data} 
+	\\end{longtable}
+endsnippet
+
+snippet ltxtable
+	\\LTXtable{\\textwidth}{tables/${1:File}.tex}
+endsnippet
+
+snippet plot
+	\\begin{figure}[h]
+	\\input{${1:File}}
+	%\\vspace*{1cm}
+	\\caption{${2:Caption}}
+	\\label{plot:${3:Label}}
+	\\end{figure}
+endsnippet
+
+snippet blankpage "Inserts a blank page"
+	\afterpage{\null\newpage}
+endsnippet
