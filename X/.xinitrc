@@ -33,7 +33,7 @@ fi
 xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screenlayout/screens
 
 # Bind keymap (de_us is modified) and change the cursor
-setxkbmap -layout de,de -variant us, -option grp:caps_toggle
+setxkbmap -layout de_custom,de -variant us, -option grp:caps_toggle
 xsetroot -cursor_name left_ptr
 
 # Compares the currently connected screens with pre-defined templates in ~/.screenlayout
