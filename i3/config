@@ -1,5 +1,6 @@
-set $mod Mod1 # Alt-key
-set $win Mod4 # Win-key
+# Define Mod keys
+set $mod Mod1
+set $win Mod4
 
 # Colors
 set $transparent #1d2021A00
@@ -137,24 +138,27 @@ floating_minimum_size 640 x 360
 
 # Hide bar on top of windows
 new_window pixel
+default_border none
 
 # Define gaps between windows and between border and windows
-gaps inner 5
-gaps outer 0
-smart_gaps on
-smart_borders on
+gaps inner 3
+gaps outer -2
+#smart_gaps on
+#smart_borders no_gaps
 
 # Special keybindings
 # Audio
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% && pkill -SIGRTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% && pkill -SIGRTMIN+1 i3blocks
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle && pkill -SIGRTMIN+1 i3blocks
-bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle && pkill -SIGRTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
 # Brightness
 bindsym XF86MonBrightnessUp exec sudo xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec sudo xbacklight -dec 10
 # Hide polybar (custom script)
 bindsym $mod+Shift+f exec hidebar
+# Lock screen with i3lock-blur
+bindsym $mod+z exec i3lock --fuzzy
 
 # Auto launched applications
 exec_always --no-startup-id /home/moritz/.config/polybar/launch.sh
