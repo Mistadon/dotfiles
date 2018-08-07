@@ -1,8 +1,9 @@
 [bar/top]
+monitor=${env:MONITOR}
 width = 100%
 height = 35 
 offset-x = 0
-offset-y = -1 
+offset-y = 0
 ;bottom = true
 
 background = #5a000000
@@ -23,7 +24,12 @@ font-2 = siji:pixelsize=10;0
 
 modules-left = bspwm xwindow
 modules-center = date 
-modules-right = keyboard battery volume wireless-network
+modules-right = keyboard battery volume 
+
+wm-restack = bspwm
+
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
 
 tray-position = right
 tray-padding = 10
@@ -31,13 +37,10 @@ tray-background = #5a000000
 tray-color = #5a000000
 tray-transparent = true
 
-wm-restack = bspwm
 
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
-
-; MODULES
-
+;;;;;;;;;;;
+; MODULES ;
+;;;;;;;;;;;
 [module/bspwm]
 type = internal/bspwm
 
@@ -62,14 +65,14 @@ label-empty-padding = 4
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:120:...%
+label = %title:0:20:...%
 label-padding = 4
 
 [module/date]
 type = internal/date
 
 ; Seconds to sleep between updates
-interval = 1.0
+interval = 5.0
 
 ; See "man date" for details on how to format the date string
 ; NOTE: if you want to use syntax tags here you need to use %%{...}
@@ -84,10 +87,8 @@ date-alt = %A, %d %B %Y
 time-alt = %H:%M:%S
 
 label = %date% %time%
-format =    <label>
-;format-background = #ddffffff
+format =   <label>
 format-background = #88000000
-;format-foreground = #333
 format-padding = 3
 
 [module/padding]
@@ -99,12 +100,12 @@ content-background = #55000000
 [module/battery]
 type = internal/battery
 
-full-at = 99
+full-at = 95
 
 battery = BAT0
 adapter = AC0
 
-poll-interval = 5
+poll-interval = 10
 
 format-charging = <animation-charging>  <label-charging>
 format-discharging = <ramp-capacity>  <label-discharging>
@@ -129,21 +130,6 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-framerate = 750
 
-[module/backlight]
-type = internal/backlight
-
-card = intel_backlight
-enable-scroll = true
-
-format = <ramp> <label>
-label = %percentage%
-
-ramp-0 = 🌕
-ramp-1 = 🌔
-ramp-2 = 🌓
-ramp-3 = 🌒
-ramp-4 = 🌑
-
 [module/volume]
 type = internal/volume
 
@@ -159,33 +145,6 @@ ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
 ramp-headphones-0 = 
-
-[module/powermenu]
-type = custom/menu
-
-label-open =   
-;label-open-background = #dd0000
-;label-open-foreground = #fff
-label-close = cancel
-;label-close-background = #dd0000
-;label-close-foreground = #fff
-label-open-padding = 4 
-label-close-padding = 3 
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-menu-0-0-padding = 3
-menu-0-1-padding = 3
-
-menu-1-0 = reboot?  
-menu-1-0-exec = sudo reboot
-menu-1-0-padding = 3
-
-menu-2-0 = power off?  
-menu-2-0-exec = sudo poweroff
-menu-2-0-padding = 3
 
 [module/keyboard]
 type = internal/xkeyboard
