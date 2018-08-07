@@ -4,7 +4,7 @@
 include "/home/moritz/.gtkrc-2.0.mine"
 gtk-theme-name="Arc-Darker"
 gtk-icon-theme-name="Papirus-Light"
-gtk-font-name="Overpass Light 14"
+gtk-font-name="Overpass Light 12"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH
