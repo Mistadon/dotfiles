@@ -1,26 +1,2 @@
-!ROFI
-!rofi.terminal:  termite
-!rofi.color-enabled: true
-!rofi.show-icons:    true
-!rofi.sidebar-mode:  true
-!rofi.separator-style: solid
-!rofi.lines:	3
-!rofi.method:	fuzzy
-!rofi.font:	Overpass 20
-rofi.color-window: argb:EE373B47, #373B47
-rofi.color-normal: argb:00373B47, #737783, argb:00373B47, argb:00373B47, #f9f9f9
-rofi.color-urgent: argb:00373B47, #cc6666, argb:e54b5160, argb:00373B47, #f9f9f9
-rofi.color-active: argb:00373B47, #65acff, argb:e44b5160, argb:00373B47, #f9f9f9
-rofi.width: 35
-rofi.lines: 16
-rofi.font: Overpass 15
-rofi.bw: 0
-rofi.padding: 50
-rofi.line-margin: 5
-rofi.eh: 1
-rofi.sidebar-mode: true
-rofi.separator-style: none
-rofi.hide-scrollbar: true
-rofi.show-icons: true
-rofi.location: 0
-rofi.modi: window,run,drun
+! URXVT
+URxvt.font: xft:Hack:size=10, xft:FontAwesome:size=10, xft:PowerlineSymbols:size=10
