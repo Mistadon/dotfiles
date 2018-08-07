@@ -2,9 +2,9 @@
 # wm independent hotkeys
 #
 
-# Run termite with or without ranger
+# Run terminal with or without ranger
 alt + {_,shift + } Return
-	termite {-e ranger,_}
+	st {-e ranger,_}
 
 # program launcher (rofi)
 alt + @space
@@ -27,6 +27,8 @@ super + alt + Escape
 # close and kill
 alt + {_,shift + }q
 	bspc node -{c,k}
+ctrl + q
+    bspc node -c
 
 # alternate between the tiled and monocle layout
 alt + m
