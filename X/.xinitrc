@@ -32,8 +32,6 @@ fi
 # Read the currently connected screens and write them to ~/.screenlayout/screens
 xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screenlayout/screens
 
-# Bind keymap (de_us is modified) and change the cursor
-setxkbmap -layout de_custom,de -variant us, -option grp:caps_toggle
 xsetroot -cursor_name left_ptr
 
 # Adds ~/.local/bin to the PATH.
