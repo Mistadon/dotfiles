@@ -1,5 +1,6 @@
 .screenlayout/screens
 GTK/gtk-3.0/bookmarks
+GTK/gtk-3.0/servers
 vim/snippets/honza.snippets
 ranger/tagged
 ranger/bookmarks
