@@ -2,6 +2,7 @@
 GTK/gtk-3.0/bookmarks
 GTK/gtk-3.0/servers
 vim/snippets/honza.snippets
+nvim/spell
 ranger/tagged
 ranger/bookmarks
 ranger/history
