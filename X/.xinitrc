@@ -34,9 +34,8 @@ xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screenlayout/scre
 
 xsetroot -cursor_name left_ptr
 
-# Adds ~/.local/bin to the PATH.
-# This allows me to add some functionality to certain executables, such as a better scaling factor for java applications and spotify and different languages for certain applications
-export PATH="/home/moritz/.local/bin:${PATH}"
+# Bind keymap (de_us is modified) and change the cursor
+setxkbmap -layout us_custom,de -option grp:caps_toggle
 
 # Compares the currently connected screens with pre-defined templates in ~/.screenlayout
 (cd /home/moritz/.screenlayout && exec find -mindepth 2 -maxdepth 2 -type f -iname screens -execdir bash -c 'cmp --silent ./screens ../screens && ./layout.sh' \;)
