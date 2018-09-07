@@ -29,7 +29,7 @@ set foldmethod=expr
 let g:UltiSnipsExpandTrigger="<C-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.dotfiles/ultisnips', $HOME.'/.local/share/nvim/plugged/vim-snippets/UltiSnips']
+let g:UltiSnipsSnippetDirectories=[$HOME.'/git/dotfiles/ultisnips', $HOME.'/.local/share/nvim/plugged/vim-snippets/UltiSnips']
 let g:UltiSnipsEditSplit="vertical"
 
 " Deoplete configuration
