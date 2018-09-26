@@ -1,0 +1,20 @@
+#
+# ~/.zprofile
+#
+
+[[ -f ~/.zshrc ]] && . ~/.zshrc
+
+export EDITOR='/usr/bin/nvim'
+export VISUAL='/usr/bin/nvim'
+export RANGER_LOAD_DEFAULT_RC='FALSE'
+
+
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+    echo Starting X server
+    exec startx
+fi
+
+#if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    #echo Starting sway
+    #XKB_DEFAULT_LAYOUT=de_custom exec sway
+#fi
