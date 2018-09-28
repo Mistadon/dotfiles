@@ -46,7 +46,16 @@ This function should only modify configuration layer settings."
      git
      ;; markdown
      neotree
-     org
+     (org :variables
+          org-capture-templates
+          '(("t" "Todo" entry (file+headline "~/org/todos.org" "Tasks")
+            "* TODO %?\n %i\n %a"))
+          org-agenda-files
+          (quote ("~/org/notes.org"
+                  "~/org/todos.org"
+                  "~/org/projectile.org"))
+          org-projectile-file "~/org/projectile.org"
+          )
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
