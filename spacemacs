@@ -94,6 +94,10 @@ This function should only modify configuration layer settings."
      xkcd
      javascript
      csv
+     lua
+     systemd
+     search-engine
+     semantic
      )
 
    ;; List of additional packages that will be installed without being
