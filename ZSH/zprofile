@@ -1,20 +1,12 @@
-#
-# ~/.zprofile
-#
-
-[[ -f ~/.zshrc ]] && . ~/.zshrc
-
-export EDITOR='/usr/bin/nvim'
-export VISUAL='/usr/bin/nvim'
-export RANGER_LOAD_DEFAULT_RC='FALSE'
+# Aliases
+alias ls='ls --color=auto'
+alias shutdown='shutdown now'
+alias java='java -Dsun.java2d.uiScale=2'
+alias pacaur='pacaur --ignore-ood'
+alias tmux="tmux -2"
+alias pip='pip --user'
 
 
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    echo Starting X server
     exec startx
 fi
-
-#if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    #echo Starting sway
-    #XKB_DEFAULT_LAYOUT=de_custom exec sway
-#fi

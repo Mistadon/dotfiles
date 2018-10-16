@@ -1,0 +1,9 @@
+# Adds ~/.local/bin to the PATH.
+# This allows me to add some functionality to certain executables, such as a better scaling factor for java applications and spotify and different languages for certain applications (e.g. gnucash)
+export PATH="/home/moritz/.local/bin:${PATH}"
+
+# Environment variables
+export EDITOR=vim
+export GDK_SCALE=1.5
+export EDITOR='emacs'
+export SSH_KEY_PATH="~/.ssh/rsa_id"
