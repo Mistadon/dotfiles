@@ -501,6 +501,21 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   (setq magit-repository-directories '("~/git/" . 1))
+  (setq browse-url-browser-function 'browse-url-generic
+        engine/browser-function 'browse-url-generic
+        browse-url-generic-program "surf")
+  (setq search-engine-alist
+        '((duck-duck-go
+           :name "Duck Duck Go"
+          :url "https://duckduckgo.com/?q=%s")
+        (wikipedia
+         :name "Wikipedia"
+         :url "https://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
+        (wolfram-alpha
+         :name "Wolfram Alpha"
+         :url "https://www.wolframalpha.com/input/?i=%s")
+        )
+        )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
