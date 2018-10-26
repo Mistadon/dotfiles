@@ -3,8 +3,6 @@
 userresources=$HOME/.Xresources
 sysresources=/etc/X11/xinit/.Xresources
 
-# merge in defaults and keymaps
-
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
 fi
@@ -29,13 +27,25 @@ xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screenlayout/scre
 # Compares the currently connected screens with pre-defined templates in ~/.screenlayout
 (cd /home/moritz/.screenlayout && exec find -mindepth 2 -maxdepth 2 -type f -iname screens -execdir bash -c 'cmp --silent ./screens ../screens && ./layout.sh' \;)
 
+# Mute speakers on start. This is a laptop, I don't want noise in lectures
+pactl set-sink-mute 0 1
 
 compton -b # Compositor
 xrandr --dpi 192 # Scaling for the hidpi screen
 udiskie -s &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 nextcloud &
 nm-applet & # Networkmanager
-exec awesome
+
+# Status bar
+while true; do
+    sh $HOME/git/dotfiles/dwm/status.sh
+    sleep 5
+done &
+
+# exec awesome
+~/.fehbg &
+exec dwm
