@@ -3,7 +3,8 @@
 export PATH="/home/moritz/.local/bin:${PATH}"
 
 # Environment variables
-export EDITOR=vim
+export TERM='st'
 export GDK_SCALE=1.5
-export EDITOR='emacs'
+export EDITOR='emacsclient -c'
 export SSH_KEY_PATH="~/.ssh/rsa_id"
+export LANG="en_US.UTF-8"
