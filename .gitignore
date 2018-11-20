@@ -6,3 +6,6 @@ nvim/spell
 ranger/tagged
 ranger/bookmarks
 ranger/history
+dwm/src
+dwm/pkg
+dwm/*.diff
