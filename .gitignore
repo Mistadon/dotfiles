@@ -9,3 +9,5 @@ ranger/history
 dwm/src
 dwm/pkg
 dwm/*.diff
+dwm/*.tar.gz
+dwm/*.tar.xz

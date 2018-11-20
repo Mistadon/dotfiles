@@ -16,10 +16,12 @@ install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
 	dwm.desktop
   config.h
-  https://dwm.suckless.org/patches/systray/dwm-$pkgver-systray.diff)
+  https://dwm.suckless.org/patches/systray/dwm-$pkgver-systray.diff
+  https://dwm.suckless.org/patches/attachaside/dwm-attachaside-$pkgver.diff)
 
 md5sums=('f0b6b1093b7207f89c2a90b848c008ec'
          '939f403a71b6e85261d09fc3412269ee'
+         SKIP
          SKIP
          SKIP)
 
@@ -27,7 +29,9 @@ prepare() {
   cd $srcdir/$pkgname-$pkgver
   cp $srcdir/config.h config.h
   cp $srcdir/dwm-$pkgver-systray.diff dwm-$pkgver-systray.diff
+  cp $srcdir/dwm-attachaside-$pkgver.diff dwm-attachaside-$pkgver.diff
   patch -p1 -i dwm-$pkgver-systray.diff
+  patch -p1 -i dwm-attachaside-$pkgver.diff
 }
 
 build() {
