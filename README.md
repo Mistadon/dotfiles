@@ -1,4 +1,8 @@
 # My dotfiles
 
-My dotfiles for Arch Linux with i3, polybar, compton, urxvt etc.
+WM: dwm
+Terminal: st
+Shell: zsh
+Editor: spacemacs (and occasionally neovim)
+
 Always work in progress
