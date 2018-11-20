@@ -25,13 +25,13 @@ setxkbmap -layout us_custom,de -option grp:caps_toggle
 # Read the currently connected screens and write them to ~/.screenlayout/screens
 xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screenlayout/screens
 # Compares the currently connected screens with pre-defined templates in ~/.screenlayout
+xrandr --output VIRTUAL1 --off --output eDP1 --primary --mode 2560x1440 --pos 0x0 --dpi 192 --rotate normal --output DP1 --off --output HDMI2 --off --output HDMI1 --off --output DP2 --off ## Default layout
 (cd /home/moritz/.screenlayout && exec find -mindepth 2 -maxdepth 2 -type f -iname screens -execdir bash -c 'cmp --silent ./screens ../screens && ./layout.sh' \;)
 
 # Mute speakers on start. This is a laptop, I don't want noise in lectures
 pactl set-sink-mute 0 1
 
 compton -b # Compositor
-xrandr --dpi 192 # Scaling for the hidpi screen
 udiskie -s &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # Keyring
@@ -46,6 +46,5 @@ while true; do
     sleep 5
 done &
 
-# exec awesome
-~/.fehbg &
+~/.fehbg
 exec dwm
