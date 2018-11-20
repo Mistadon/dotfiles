@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -566,11 +566,11 @@ This function is called at the very end of Spacemacs initialization."
      ("" "capt-of" nil nil)
      ("" "hyperref" nil nil)
      ("" "tikz" nil nil))))
- '(org-startup-with-latex-preview t)
+ '(org-startup-with-latex-preview t t)
  '(package-selected-packages
    (quote
-    (lsp-julia lsp-mode julia-repl julia-mode
-               (font . "Iosevka-9")))))
+    (vmd-mode mmm-mode markdown-toc markdown-mode gh-md emoji-cheat-sheet-plus company-emoji company
+              (font . "Iosevka-9")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
