@@ -47,11 +47,13 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
+#include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+  { "[@]",      spiral },
 };
 
 /* key definitions */
@@ -69,6 +71,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const char *rangercmd[]  = { "st", "-e", "ranger", NULL };
 static const char *vol_down[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
 static const char *vol_up[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
@@ -77,12 +81,14 @@ static const char *brightness_down[] = { "xbacklight", "-dec", "2", NULL };
 static const char *brightness_ten_down[] = { "xbacklight", "-dec", "10", NULL };
 static const char *brightness_up[] = { "xbacklight", "-inc", "2", NULL };
 static const char *brightness_ten_up[] = { "xbacklight", "-inc", "10", NULL };
+static const char *editor_cmd[] = { "emacsclient", "-ca", "\"\"", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = rangercmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -90,13 +96,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_u,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	/* { MODKEY,                       XK_Return, zoom,           {0} }, */
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -108,10 +114,11 @@ static Key keys[] = {
 	{ 0,                            XF86AudioRaiseVolume,      spawn, {.v = vol_up } },
 	{ 0,                            XF86AudioLowerVolume,      spawn, {.v = vol_down } },
 	{ 0,                            XF86AudioMute,             spawn, {.v = vol_toggle } },
-	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = brightness_up } },
-	{ ShiftMask,                    XF86MonBrightnessUp,       spawn, {.v = brightness_ten_up } },
-	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = brightness_down } },
-	{ ShiftMask,                    XF86MonBrightnessDown,     spawn, {.v = brightness_ten_down } },
+	{ ShiftMask,                    XF86MonBrightnessUp,       spawn, {.v = brightness_up } },
+	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = brightness_ten_up } },
+	{ ShiftMask,                    XF86MonBrightnessDown,     spawn, {.v = brightness_down } },
+	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = brightness_ten_down } },
+	{ MODKEY,                       XK_e,                      spawn, {.v = editor_cmd } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
