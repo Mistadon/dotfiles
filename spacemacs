@@ -33,51 +33,32 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(markdown
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     helm
-     ;; auto-completion
-     ;; better-defaults
+   '(
+     ;; Programming languages
+     lua
      emacs-lisp
-     (git :variables
-          magit-repository-directories '("~/git/" . 1))
-     ;; markdown
-     neotree
+     ;; julia
+     ess
+
+     ;; Markup languages
+     html
+     markdown
+     bibtex
      (org :variables
-          org-capture-templates
-          '(("t" "Todo" entry (file+headline "~/org/todos.org" "Tasks")
-             "* TODO %?\n %i\n %a"))
-          org-agenda-files
-          (quote ("~/org/notes.org"
-                  "~/org/todos.org"
-                  "~/org/projectile.org"))
-          org-projectile-file "~/org/projectile.org"
           org-preview-latex-process-alist
           (quote
-             ((dvipng :programs
-                      ("latex" "dvipng")
-             :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
-             (2.0 . 2.0)
-             :latex-compiler
-             ("latex -interaction nonstopmode -output-directory %o %f")
-             :image-converter
-             ("dvipng -fg %F -bg %B -D %D -T tight -o %O %f"))
-              ("convert -density %D -trim -antialias %f -quality 100 %O")))
-            org-startup-with-latex-preview t
+           ;; This will render LaTeX formulas larger, because my laptop has a high DPI screen
+           ((dvipng :programs
+                    ("latex" "dvipng")
+                    :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
+                    (2.0 . 2.0)
+                    :latex-compiler
+                    ("latex -interaction nonstopmode -output-directory %o %f")
+                    :image-converter
+                    ("dvipng -fg %F -bg %B -D %D -T tight -o %O %f"))
+            ("convert -density %D -trim -antialias %f -quality 100 %O")))
+          org-startup-with-latex-preview t
           )
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
-     ;; version-control
-     (ranger :variables
-             ranger-show-preview t
-             ranger-show-hidden nil)
      (latex :variables
             latex-enable-folding t
             latex-enable-auto-fill t
@@ -98,15 +79,29 @@ This function should only modify configuration layer settings."
               (output-pdf "Zathura")
               (output-html "xdg-open")))
             )
+
+     ;; Utilities
+     helm
+     pdf
+     neotree
+     ibuffer
+     spell-checking
+     syntax-checking
      themes-megapack
-     bibtex
+     csv
+     systemd
+     (git :variables
+          magit-repository-directories '("~/git/" . 1))
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     (ranger :variables
+             ;; ranger-show-preview t
+             ranger-show-hidden nil)
      (python :variables
              python-enable-yapf-format-on-save t
              python-sort-imports-on-save t
              )
-     csv
-     lua
-     systemd
      (search-engine :variables
                     search-engine-alist
                     '((duck-duck-go
@@ -126,11 +121,6 @@ This function should only modify configuration layer settings."
                     engine/browser-function 'browse-url-generic
                     browse-url-generic-program "surf"
                     )
-     pdf
-     games
-     gnus
-     ibuffer
-     julia
      )
 
    ;; List of additional packages that will be installed without being
@@ -548,29 +538,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
- '(org-latex-default-packages-alist
-   (quote
-    (("AUTO" "inputenc" t
-      ("pdflatex"))
-     ("T1" "fontenc" t
-      ("pdflatex"))
-     ("" "graphicx" t nil)
-     ("" "grffile" t nil)
-     ("" "longtable" nil nil)
-     ("" "wrapfig" nil nil)
-     ("" "rotating" nil nil)
-     ("normalem" "ulem" t nil)
-     ("" "amsmath" t nil)
-     ("" "textcomp" t nil)
-     ("" "amssymb" t nil)
-     ("" "capt-of" nil nil)
-     ("" "hyperref" nil nil)
-     ("" "tikz" nil nil))))
- '(org-startup-with-latex-preview t t)
- '(package-selected-packages
-   (quote
-    (vmd-mode mmm-mode markdown-toc markdown-mode gh-md emoji-cheat-sheet-plus company-emoji company
-              (font . "Iosevka-9")))))
+ '(org-babel-python-command "python2")
+ '(package-selected-packages (setq default-frame-alist (quote ((font . "Iosevka-9"))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
