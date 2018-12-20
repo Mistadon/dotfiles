@@ -19,21 +19,38 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-# setxkbmap -layout us_custom
 setxkbmap -layout us_custom,de -option grp:caps_toggle
 
 # Read the currently connected screens and write them to ~/.screenlayout/screens
 xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screenlayout/screens
 # Compares the currently connected screens with pre-defined templates in ~/.screenlayout
-xrandr --output VIRTUAL1 --off --output eDP1 --primary --mode 2560x1440 --pos 0x0 --dpi 192 --rotate normal --output DP1 --off --output HDMI2 --off --output HDMI1 --off --output DP2 --off ## Default layout
 (cd /home/moritz/.screenlayout && exec find -mindepth 2 -maxdepth 2 -type f -iname screens -execdir bash -c 'cmp --silent ./screens ../screens && ./layout.sh' \;)
 
+###############################
+# HOST SPECIFIC CONFIGURATION #
+###############################
 # Mute speakers on start. This is a laptop, I don't want noise in lectures
-pactl set-sink-mute 0 1
+# Also, set screen layout
+if [[ $(hostname) = 'moritz-arch' ]]; then
+    pactl set-sink-mute 0 1
+    pactl set-sink-volume 0 0
+    xrandr --output eDP1 --mode 2560x1440 --pos 0x0 --rotate normal
+fi
 
+# Home PC, set to standard volume of 100%, is controlled externally anyways
+# Also, set screen layout
+if [[ $(hostname) = 'moritz-pc-arch' ]]; then
+    pactl set-sink-mute 0 0
+    pactl set-sink-volume 0 100%
+    xrandr --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off
+fi
+
+# Autostart applications
 compton -b # Compositor
 udiskie -s &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+nextcloud &
+nm-applet & # Networkmanager
 # Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
@@ -47,5 +64,7 @@ while true; do
     sleep 5
 done &
 
-~/.fehbg
+# Set background
+feh --bg-fill '/home/moritz/Nextcloud/misc/wallpapers/radium.jpg'
+#!/bin/sh
 exec dwm

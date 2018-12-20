@@ -1,4 +1,7 @@
-bat=$(acpi | awk '{
+separator=" | "
+pad=" "
+if [ $(hostname) = "moritz-laptop-arch" ]; then
+    bat=$(acpi | awk '{
            gsub(",", "", $4)
            gsub(":[0-5][0-9]$", "", $5)
            if ($3 == "Discharging,") {
@@ -13,9 +16,12 @@ bat=$(acpi | awk '{
               }
            }
            }')
+    bat = " $bat $separator"
+else
+    bat=''
+fi
+
 # datetime=$(date +"%A, %d %B %Y, %R")
 date=$(date +"%A, %d %B %Y")
 time=$(date +"%R")
-separator=" | "
-pad=" "
-xsetroot -name " $bat $separator $date $separator $time $pad"
+xsetroot -name "$bat $date $separator $time $pad"
