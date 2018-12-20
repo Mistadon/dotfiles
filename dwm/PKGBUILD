@@ -17,28 +17,34 @@ source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
 	dwm.desktop
   config.h
   https://dwm.suckless.org/patches/systray/dwm-$pkgver-systray.diff
-  https://dwm.suckless.org/patches/attachbottom/dwm-attachbottom-$pkgver.diff)
+  https://dwm.suckless.org/patches/attachbottom/dwm-attachbottom-$pkgver.diff
+  https://dwm.suckless.org/patches/scratchpad/dwm-scratchpad-20170207-bb3bd6f.diff
+  https://dwm.suckless.org/patches/fibonacci/dwm-fibonacci-5.8.2.diff
+  )
 
 sha256sums=('c2f6c56167f0acdbe3dc37cca9c1a19260c040f2d4800e3529a21ad7cce275fe'
             'bc36426772e1471d6dd8c8aed91f288e16949e3463a9933fee6390ee0ccd3f81'
             SKIP
             '6fd6951cff7cddac177a92bf2243101c2c23e4023e6542b71ab520d778f94205'
             '0e8e25bc65e96ce9276609bda3cce9792afbf7e6c6b4c1754354bdefa83a641f'
+            SKIP
+            SKIP
             )
 
 prepare() {
   cd $srcdir/$pkgname-$pkgver
   cp $srcdir/config.h config.h
-  cp $srcdir/dwm-$pkgver-systray.diff dwm-$pkgver-systray.diff
-  cp $srcdir/dwm-attachbottom-$pkgver.diff dwm-attachbottom-$pkgver.diff
 
-  patch -p1 -i dwm-$pkgver-systray.diff
-  patch -p1 -i dwm-attachbottom-$pkgver.diff
+  patch -p1 -i $srcdir/dwm-$pkgver-systray.diff
+  patch -p1 -i $srcdir/dwm-attachbottom-$pkgver.diff
+  patch -p1 -i $srcdir/dwm-scratchpad-20170207-bb3bd6f.diff
+  patch -p1 -i $srcdir/dwm-fibonacci-5.8.2.diff
 }
 
 build() {
   cd $srcdir/$pkgname-$pkgver
   make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 FREETYPEINC=/usr/include/freetype2
+  rm fibonacci.c
 }
 
 package() {
