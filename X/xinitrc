@@ -39,6 +39,7 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 nextcloud &
 nm-applet & # Networkmanager
+caffeine &
 
 # Status bar
 while true; do
