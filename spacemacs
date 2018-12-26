@@ -37,8 +37,11 @@ This function should only modify configuration layer settings."
      ;; Programming languages
      lua
      emacs-lisp
-     ;; julia
      ess
+     (python :variables
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t
+             )
 
      ;; Markup languages
      html
@@ -98,10 +101,6 @@ This function should only modify configuration layer settings."
      (ranger :variables
              ;; ranger-show-preview t
              ranger-show-hidden nil)
-     (python :variables
-             python-enable-yapf-format-on-save t
-             python-sort-imports-on-save t
-             )
      (search-engine :variables
                     search-engine-alist
                     '((duck-duck-go
@@ -523,6 +522,14 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  (with-eval-after-load 'org
+    (setq-default org-pretty-entities t
+                  org-hide-leading-stars t
+                  org-adapt-indentation t))
+  (defun my-org-settings ()
+    (org-indent-mode)
+    )
+  (add-hook 'org-mode-hook #'my-org-settings)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
