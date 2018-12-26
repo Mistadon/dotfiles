@@ -1,6 +1,6 @@
 separator=" | "
 pad=" "
-if [ $(hostname) = "moritz-laptop-arch" ]; then
+if [ $(hostname) = "moritz-arch" ]; then
     bat=$(acpi | awk '{
            gsub(",", "", $4)
            gsub(":[0-5][0-9]$", "", $5)
