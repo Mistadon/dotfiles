@@ -1,5 +1,5 @@
-separator=" | "
-pad=" "
+separator="|"
+
 if [ $(hostname) = "moritz-arch" ]; then
     bat=$(acpi | awk '{
            gsub(",", "", $4)
@@ -16,7 +16,7 @@ if [ $(hostname) = "moritz-arch" ]; then
               }
            }
            }')
-    bat = " $bat $separator"
+    bat=" $bat $separator "
 else
     bat=''
 fi
@@ -24,4 +24,4 @@ fi
 # datetime=$(date +"%A, %d %B %Y, %R")
 date=$(date +"%A, %d %B %Y")
 time=$(date +"%R")
-xsetroot -name "$bat $date $separator $time $pad"
+xsetroot -name "$bat$date $separator $time"
