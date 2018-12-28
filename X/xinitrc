@@ -2,6 +2,8 @@
 
 userresources=$HOME/.Xresources
 sysresources=/etc/X11/xinit/.Xresources
+dotfiles=$HOME/git/dotfiles
+wallpapers=$HOME/Nextcloud/misc/wallpapers
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
