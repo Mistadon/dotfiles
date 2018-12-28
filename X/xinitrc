@@ -40,12 +40,12 @@ export SSH_AUTH_SOCK
 
 # Status bar
 while true; do
-    sh $HOME/git/dotfiles/dwm/status.sh
+    sh $dotfiles/dwm/status.sh
     sleep 5
 done &
 
 # Set background
-feh --bg-fill '/home/moritz/Nextcloud/misc/wallpapers/radium.jpg'
+feh --bg-fill $wallpapers/radium.jpg
 
 # Set keyboard layout
 setxkbmap -layout us_custom,de -option grp:caps_toggle
@@ -63,4 +63,5 @@ elif [ $(hostname)='moritz-pc-arch' ]; then
     xrandr --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off
 fi
 
-exec dwm
+# Start DWM
+sh $dotfiles/X/startdwm.sh
