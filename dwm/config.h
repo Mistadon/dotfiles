@@ -77,10 +77,11 @@ static const char *rangercmd[]  = { "st", "-e", "ranger", NULL };
 static const char *vol_down[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
 static const char *vol_up[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
 static const char *vol_toggle[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
-static const char *brightness_two_down[] = { "xbacklight", "-dec", "2", NULL };
+static const char *brightness_down[] = { "xbacklight", "-dec", "2", NULL };
 static const char *brightness_ten_down[] = { "xbacklight", "-dec", "10", NULL };
-static const char *brightness_two_up[] = { "xbacklight", "-inc", "2", NULL };
+static const char *brightness_up[] = { "xbacklight", "-inc", "2", NULL };
 static const char *brightness_ten_up[] = { "xbacklight", "-inc", "10", NULL };
+static const char *editor_cmd[] = { "emacsclient", "-ca", "\"\"", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -113,10 +114,11 @@ static Key keys[] = {
 	{ 0,                            XF86AudioRaiseVolume,      spawn, {.v = vol_up } },
 	{ 0,                            XF86AudioLowerVolume,      spawn, {.v = vol_down } },
 	{ 0,                            XF86AudioMute,             spawn, {.v = vol_toggle } },
-	{ ShiftMask,                    XF86MonBrightnessUp,       spawn, {.v = brightness_two_up } },
+	{ ShiftMask,                    XF86MonBrightnessUp,       spawn, {.v = brightness_up } },
 	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = brightness_ten_up } },
-	{ ShiftMask,                    XF86MonBrightnessDown,     spawn, {.v = brightness_two_down } },
+	{ ShiftMask,                    XF86MonBrightnessDown,     spawn, {.v = brightness_down } },
 	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = brightness_ten_down } },
+	{ MODKEY,                       XK_e,                      spawn, {.v = editor_cmd } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
