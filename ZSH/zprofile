@@ -2,7 +2,6 @@
 alias ls='ls --color=auto'
 alias shutdown='shutdown now'
 alias java='java -Dsun.java2d.uiScale=2'
-alias pacaur='pacaur --ignore-ood'
 alias tmux="tmux -2"
 alias pip='pip --user'
 
