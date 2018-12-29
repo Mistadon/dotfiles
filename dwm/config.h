@@ -86,7 +86,7 @@ static const char *brightness_ten_up[] = { "xbacklight", "-inc", "10", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,                       XK_d,      spawn,          {.v = duckduckgocmd } },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = duckduckgocmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = rangercmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
  	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
