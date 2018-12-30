@@ -1,0 +1,3 @@
+#!/bin/sh
+cd ~/Downloads
+tabbed -fr2 /usr/bin/surf -pge x https://start.duckduckgo.com
