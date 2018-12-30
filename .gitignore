@@ -11,3 +11,10 @@ dwm/pkg
 dwm/*.diff
 dwm/*.tar.gz
 dwm/*.tar.xz
+surf/src
+surf/pkg
+surf/*.diff
+surf/*.tar.gz
+surf/*.tar.xz
+surf/surf
+surf/.*
