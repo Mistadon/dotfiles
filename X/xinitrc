@@ -53,11 +53,11 @@ setxkbmap -layout us_custom,de -option grp:caps_toggle
 # Host specific configuration
 # Hostname 'moritz-arch': mute speakers on start. This is a laptop, I don't want noise in lectures
 # Hostname 'moritz-pc-arch': home PC, set to standard volume of 100%, is controlled externally anyways
-if [ $(hostname)='moritz-arch' ]; then
+if [ $(hostname) = 'moritz-arch' ]; then
     pactl set-sink-mute 0 1
     pactl set-sink-volume 0 0
     xrandr --output eDP1 --primary --mode 2560x1440 --pos 0x0 --rotate normal
-elif [ $(hostname)='moritz-pc-arch' ]; then
+elif [ $(hostname) = 'moritz-pc-arch' ]; then
     pactl set-sink-mute 0 0
     pactl set-sink-volume 0 100%
     xrandr --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off
