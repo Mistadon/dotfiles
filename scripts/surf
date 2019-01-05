@@ -1,3 +1,4 @@
 #!/bin/sh
+[ $1 ] && startpage=$1 || startpage='https://start.duckduckgo.com'
 cd ~/Downloads
-tabbed -fr2 /usr/bin/surf -pge x https://start.duckduckgo.com
+tabbed -fr2 /usr/bin/surf -pge x $startpage
