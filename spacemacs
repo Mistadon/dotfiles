@@ -38,6 +38,7 @@ This function should only modify configuration layer settings."
      lua
      emacs-lisp
      ess
+     c-c++
      (python :variables
              python-enable-yapf-format-on-save t
              python-sort-imports-on-save t
@@ -93,6 +94,7 @@ This function should only modify configuration layer settings."
      themes-megapack
      csv
      systemd
+     games
      (git :variables
           magit-repository-directories '("~/git/" . 1))
      (shell :variables
@@ -546,8 +548,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode ess-R-data-view ess emmet-mode
-              (font . "Iosevka-14")))))
+    (helm-rtags google-c-style flycheck-rtags rtags disaster clang-format
+                (font . "Iosevka-14")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
