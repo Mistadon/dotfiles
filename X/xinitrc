@@ -56,11 +56,11 @@ setxkbmap -layout us_custom,de -option grp:caps_toggle
 if [ $(hostname) = 'moritz-arch' ]; then
     pactl set-sink-mute 0 1
     pactl set-sink-volume 0 0
-    xrandr --output eDP1 --primary --mode 2560x1440 --pos 0x0 --rotate normal
+    # xrandr --output eDP1 --primary --mode 2560x1440 --pos 0x0 --rotate normal
 elif [ $(hostname) = 'moritz-pc-arch' ]; then
     pactl set-sink-mute 0 0
     pactl set-sink-volume 0 100%
-    xrandr --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off
+    # xrandr --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off
 fi
 
 # Start DWM
