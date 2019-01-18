@@ -5,6 +5,14 @@ alias java='java -Dsun.java2d.uiScale=2'
 alias tmux="tmux -2"
 alias pip='pip --user'
 
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+wm="dwm"
+
+if [ "$wm" = "dwm" ] && [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
     exec startx
+fi
+
+if [ "$wm" = "sway" ] && [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  export XKB_DEFAULT_LAYOUT=us_custom,de
+  export XKB_DEFAULT_OPTIONS=grp:caps_toggle
+  exec sway
 fi
