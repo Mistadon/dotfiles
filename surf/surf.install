@@ -25,3 +25,4 @@ pre_remove() {
 post_remove() {
   /bin/true
 }
+

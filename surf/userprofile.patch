@@ -1,0 +1,96 @@
+From 34f94a744398741e6369276e71ed6ffcf83f340d Mon Sep 17 00:00:00 2001
+From: Mistadon <mail@moritzwm.de>
+Date: Fri, 18 Jan 2019 10:26:49 +0100
+Subject: [PATCH] Created userprofile patch
+
+---
+ config.def.h | 11 ++++++-----
+ surf.c       | 29 ++++++++++++++++++++++-------
+ 2 files changed, 28 insertions(+), 12 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 8cdc397..823bb0b 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -1,11 +1,12 @@
+ /* modifier 0 means no modifier */
+ static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
+ static char *fulluseragent  = ""; /* Or override the whole user agent string */
+-static char *scriptfile     = "~/.surf/script.js";
+-static char *styledir       = "~/.surf/styles/";
+-static char *certdir        = "~/.surf/certificates/";
+-static char *cachedir       = "~/.surf/cache/";
+-static char *cookiefile     = "~/.surf/cookies.txt";
++static char *userprofile    = "default";
++static char *scriptfile     = "script.js";
++static char *styledir       = "styles/";
++static char *certdir        = "certificates/";
++static char *cachedir       = "cache/";
++static char *cookiefile     = "cookies.txt";
+ 
+ /* Webkit default features */
+ /* Highest priority value will be used.
+diff --git a/surf.c b/surf.c
+index d48fbc9..8ddbfbc 100644
+--- a/surf.c
++++ b/surf.c
+@@ -306,7 +306,7 @@ usage(void)
+ {
+ 	die("usage: surf [-bBdDfFgGiIkKmMnNpPsStTvwxX]\n"
+ 	    "[-a cookiepolicies ] [-c cookiefile] [-C stylefile] [-e xid]\n"
+-	    "[-r scriptfile] [-u useragent] [-z zoomlevel] [uri]\n");
++	    "[-o userprofile] [-r scriptfile] [-u useragent] [-z zoomlevel] [uri]\n");
+ }
+ 
+ void
+@@ -336,10 +336,20 @@ setup(void)
+ 	curconfig = defconfig;
+ 
+ 	/* dirs and files */
+-	cookiefile = buildfile(cookiefile);
+-	scriptfile = buildfile(scriptfile);
+-	cachedir   = buildpath(cachedir);
+-	certdir    = buildpath(certdir);
++  char *tcookiefile[8 + strlen(userprofile) + 1 + strlen(cookiefile)];
++  char *tscriptfile[8 + strlen(userprofile) + 1 + strlen(scriptfile)];
++  char *tcachedir[8 + strlen(userprofile) + 1 + strlen(cachedir)];
++  char *tcertdir[8 + strlen(userprofile) + 1 + strlen(certdir)];
++
++  sprintf(tcookiefile, "~/.surf/%s/%s", userprofile, cookiefile);
++  sprintf(tscriptfile, "~/.surf/%s/%s", userprofile, scriptfile);
++  sprintf(tcachedir, "~/.surf/%s/%s", userprofile, cachedir);
++  sprintf(tcertdir, "~/.surf/%s/%s", userprofile, certdir);
++
++	cookiefile = buildfile(tcookiefile);
++	scriptfile = buildfile(tscriptfile);
++	cachedir   = buildpath(tcachedir);
++	certdir    = buildpath(tcertdir);
+ 
+ 	gdkkb = gdk_seat_get_keyboard(gdk_display_get_default_seat(gdpy));
+ 
+@@ -365,7 +375,9 @@ setup(void)
+ 	}
+ 
+ 	if (!stylefile) {
+-		styledir = buildpath(styledir);
++    char *tstyledir[8 + strlen(userprofile) + 1 + strlen(styledir)];
++    sprintf(tstyledir, "~/.surf/%s/%s", userprofile, styledir);
++		styledir = buildpath(tstyledir);
+ 		for (i = 0; i < LENGTH(styles); ++i) {
+ 			if (!regcomp(&(styles[i].re), styles[i].regex,
+ 			    REG_EXTENDED)) {
+@@ -2049,7 +2061,10 @@ main(int argc, char *argv[])
+ 	case 'N':
+ 		defconfig[Inspector].val.i = 1;
+ 		defconfig[Inspector].prio = 2;
+-		break;
++	break;
++  case 'o':
++    userprofile = EARGF(usage());
++    break;
+ 	case 'p':
+ 		defconfig[Plugins].val.i = 0;
+ 		defconfig[Plugins].prio = 2;
+-- 
+2.20.1
+

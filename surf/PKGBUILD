@@ -1,50 +1,59 @@
-# Maintainer: Lukas Fleischer <lfleischer@archlinux.org>
-# Contributor: Pierre Chapuis <catwell at archlinux dot us>
-# Contributor: Ray Kohler <ataraxia937 at gmail dot com>
-# Contributor: Michael Witten <mfwitten>
-# Contributor: Raphael Proust <raphlalou at gmail dot com>
-# Modified:    By me
+# Maintainer: cdude
+# Contributor: sekret
+# Modified: Mistadon
 
-pkgname=surf
-pkgver=2.0
-pkgrel=2
-pkgdesc='A simple web browser based on WebKit/GTK+.'
-arch=('x86_64')
-url='http://surf.suckless.org/'
-license=('MIT')
-depends=('webkit2gtk' 'xorg-xprop')
-optdepends=('dmenu: URL-bar'
-            'ca-certificates: SSL verification'
-            'xterm: default download handler'
-            'curl: default download handler')
+_pkgname=surf
+pkgname=$_pkgname-git
+pkgver=2.0.r68.g2b71a22
+pkgrel=1
+pkgdesc="a WebKit based browser"
+arch=('i686' 'x86_64')
+url="http://surf.suckless.org/"
+license=('custom:MIT/X')
+depends=('webkit2gtk' 'gcr' 'xorg-xprop')
 makedepends=('git')
-install='surf.install'
-_commit=b814567e2bf8bda07cea8de1c7a062f4aa437b65
-source=("git+git://git.suckless.org/surf#commit=$_commit"
-        'config.h')
+optdepends=('dmenu: url bar and search'
+            'tabbed: tab browsing'
+            'ca-certificates: SSL verification'
+            'st: default terminal for the download handler'
+            'curl: default download handler'
+            'mpv: default video player')
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+source=("$_pkgname::git+https://git.suckless.org/surf"
+        'config.h'
+        'userprofile.patch')
 md5sums=('SKIP'
+         'SKIP'
          'SKIP')
 
 pkgver() {
-  cd "${srcdir}/${pkgname}"
-  git describe --tags | sed 's/-/+/g' | sed 's/0.6/0.7/'
+  cd "$_pkgname"
+  git describe --long --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "$_pkgname"
+  for file in "${source[@]}"; do
+      if [[ "$file" == "config.h" ]]; then
+          # add config.h if present in source array
+          cp "$srcdir/$file" .
+      elif [[ "$file" == *.diff || "$file" == *.patch ]]; then
+          # add all patches present in source array
+          patch -Np1 < "$srcdir/$(basename ${file})"
+      fi
+   done
 }
 
 build() {
-  cd "${srcdir}/${pkgname}"
-
-  cp "${srcdir}/config.h" config.h
-
-  sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
-  sed -i 's/CFLAGS =/CFLAGS +=/g' config.mk
-  sed -i 's/LDFLAGS =/LDFLAGS +=/g' config.mk
-
-  make
+  cd "$_pkgname"
+  make PREFIX=/usr DESTDIR="$pkgdir"
 }
 
 package() {
-  cd "${srcdir}/${pkgname}"
-
-  make PREFIX=/usr DESTDIR="${pkgdir}" install
-  install -Dm0644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  cd "$_pkgname"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
+
+# vim:set ts=2 sw=2 et:
