@@ -1,0 +1,2 @@
+#!/bin/sh
+surf -pgo reddit https://old.reddit.com
