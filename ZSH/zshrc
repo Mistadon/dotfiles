@@ -10,3 +10,15 @@ zstyle :compinstall filename '/home/moritz/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# Launch tmux (snippet taken from the arch wiki)
+# At "tmux attach || exit", I replaced break with exit so the terminal window closes automatically and I dont have to type exit twice
+if which tmux >/dev/null 2>&1; then
+    # if no session is started, start a new session
+    test -z ${TMUX} && tmux
+
+    # when quitting tmux, try to attach
+    while test -z ${TMUX}; do
+        tmux attach || exit
+    done
+fi
