@@ -86,15 +86,12 @@ This function should only modify configuration layer settings."
 
      ;; Utilities
      helm
-     pdf
-     neotree
      ibuffer
      spell-checking
      syntax-checking
      themes-megapack
      csv
      systemd
-     games
      (git :variables
           magit-repository-directories '("~/git/" . 1))
      (shell :variables
@@ -103,25 +100,6 @@ This function should only modify configuration layer settings."
      (ranger :variables
              ;; ranger-show-preview t
              ranger-show-hidden nil)
-     (search-engine :variables
-                    search-engine-alist
-                    '((duck-duck-go
-                       :name "Duck Duck Go"
-                       :url "https://duckduckgo.com/?q=%s")
-                      (surf
-                       :name "Surf"
-                       :url "%s")
-                      (wikipedia
-                       :name "Wikipedia"
-                       :url "https://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
-                      (wolfram-alpha
-                       :name "Wolfram Alpha"
-                       :url "https://www.wolframalpha.com/input/?i=%s")
-                      )
-                    browse-url-browser-function 'browse-url-generic
-                    engine/browser-function 'browse-url-generic
-                    browse-url-generic-program "surf"
-                    )
      )
 
    ;; List of additional packages that will be installed without being
