@@ -3,7 +3,6 @@
 userresources=$HOME/.Xresources
 sysresources=/etc/X11/xinit/.Xresources
 dotfiles=$HOME/git/dotfiles
-$screenlayoutdir=$dotfiles/screenlayout/$(hostname)
 wallpapers=$HOME/Nextcloud/misc/wallpapers
 
 if [ -f $sysresources ]; then
@@ -22,22 +21,12 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-# Read the currently connected screens and write them to ~/.screens
-xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screens
-# Compares the currently connected screens with pre-defined templates in $screenlayoutdir
-(cd $screenlayoutdir && exec find -mindepth 2 -maxdepth 2 -type f -iname screens -execdir bash -c 'cmp --silent ./screens $HOME/.screens && ./layout.sh' \;)
-
-# Autostart applications
-compton -b # Compositor
-udiskie -s & # Udiskie, automounts thumb drives
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # Graphical authentication agent
-nextcloud & # Nextcloud
-nm-applet & # Networkmanager
-caffeine & # Caffeine
-
 # Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
+
+sh $dotfiles/scripts/configure_screens.sh
+sh $dotfiles/scripts/autostart.sh
 
 # Status bar
 while true; do
