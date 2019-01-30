@@ -12,13 +12,13 @@ compinit
 # End of lines added by compinstall
 
 # Launch tmux (snippet taken from the arch wiki)
-# At "tmux attach || exit", I replaced break with exit so the terminal window closes automatically and I dont have to type exit twice
-if which tmux >/dev/null 2>&1; then
-    # if no session is started, start a new session
-    test -z ${TMUX} && tmux
-
-    # when quitting tmux, try to attach
-    while test -z ${TMUX}; do
-        tmux attach || exit
-    done
+# On launch, try to attach to a detached session. If none exist, create a new one
+# I added the "&& exit" parts, so I don't have to type exit twice to close a terminal window
+if [[ -z "$TMUX" ]] ;then
+    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
+    if [[ -z "$ID" ]] ;then # if not available create a new one
+        tmux new-session && exit
+    else
+        tmux attach-session -t "$ID" && exit # if available attach to it
+    fi
 fi
