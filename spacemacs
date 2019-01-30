@@ -62,6 +62,11 @@ This function should only modify configuration layer settings."
                     ("dvipng -fg %F -bg %B -D %D -T tight -o %O %f"))
             ("convert -density %D -trim -antialias %f -quality 100 %O")))
           org-startup-with-latex-preview t
+          org-enable-reveal-js-support t
+          org-reveal-root "file:///home/moritz/.reveal.js-3.7.0/"
+          org-reveal-plugins "notes"
+          user-full-name "Moritz Wachsmuth-Melm"
+          user-mail-adress "mail@moritzwm.de"
           )
      (latex :variables
             latex-enable-folding t
@@ -524,10 +529,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (helm-rtags google-c-style flycheck-rtags rtags disaster clang-format
-                (font . "Iosevka-14")))))
+ '(package-selected-packages (setq default-frame-alist (quote ((font . "Iosevka-14"))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
