@@ -18,3 +18,11 @@ surf/*.tar.gz
 surf/*.tar.xz
 surf/surf
 surf/.*
+st/src
+st/pkg
+st/*.diff
+st/*.tar.gz
+st/*.tar.xz
+st/st
+st/.*
+st/PKGBUILD

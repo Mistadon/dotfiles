@@ -87,7 +87,7 @@ static const char *colorname[] = {
 
   /* 8 normal colors */
   [0] = "#002b36", /* black   */
-  [1] = "#ff0400", /* red     */
+  [1] = "#dc322f", /* red     */
   [2] = "#859900", /* green   */
   [3] = "#b58900", /* yellow  */
   [4] = "#268bd2", /* blue    */
@@ -97,7 +97,7 @@ static const char *colorname[] = {
 
   /* 8 bright colors */
   [8]  = "#657b83", /* black   */
-  [9]  = "#bd3936", /* red     */
+  [9]  = "#dc322f", /* red     */
   [10] = "#859900", /* green   */
   [11] = "#b58900", /* yellow  */
   [12] = "#268bd2", /* blue    */
@@ -106,20 +106,26 @@ static const char *colorname[] = {
   [15] = "#fdf6e3", /* white   */
 
   /* special colors */
-  [256] = "#002b36", /* background */
-  [257] = "#93a1a1", /* foreground */
+  [256] = "#fdf6e3", /* background */
+  [257] = "#586e75", /* foreground */
 };
-
 
 /*
  * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
+ * foreground, background, cursor
  */
 unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
 static unsigned int defaultcs = 257;
 static unsigned int defaultrcs = 257;
 
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
 /*
  * Default shape of cursor
  * 2: Block ("█")
