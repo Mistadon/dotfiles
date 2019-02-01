@@ -13,15 +13,15 @@ static const char *fonts[] = {
                               "Hack:size=16"
 };
 static const char dmenufont[]       = "Hack:size=16";
-static const char normbordercolor[] = "#f8eacf";
-static const char normbgcolor[]     = "#f8eacf";
-static const char normfgcolor[]     = "#000000";
-static const char selbordercolor[]  = "#f8eacf";
-static const char selbgcolor[]      = "#b3a995";
-static const char selfgcolor[]      = "#ffffff";
+static const char normbordercolor[] = "#444444";
+static const char normbgcolor[]     = "#222222";
+static const char normfgcolor[]     = "#bbbbbb";
+static const char selbordercolor[]  = "#005577";
+static const char selbgcolor[]      = "#005577";
+static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 8;       /* snap pixel */
-static const unsigned int gappx     = 4;        /* gap between windows */
+static const unsigned int gappx     = 0;        /* gap between windows */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -38,7 +38,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "idontlikerules",     NULL,       NULL,       0,            0,           -1 },
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	/* { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 }, */
 };
 
