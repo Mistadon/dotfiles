@@ -13,15 +13,15 @@ static const char *fonts[] = {
                               "Hack:size=16"
 };
 static const char dmenufont[]       = "Hack:size=16";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#005577";
-static const char selbgcolor[]      = "#005577";
-static const char selfgcolor[]      = "#eeeeee";
+static const char normbordercolor[] = "#f8eacf";
+static const char normbgcolor[]     = "#f8eacf";
+static const char normfgcolor[]     = "#000000";
+static const char selbordercolor[]  = "#f8eacf";
+static const char selbgcolor[]      = "#b3a995";
+static const char selfgcolor[]      = "#ffffff";
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 8;       /* snap pixel */
-static const unsigned int gappx     = 0;        /* gap between windows */
+static const unsigned int gappx     = 4;        /* gap between windows */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -38,7 +38,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "idontlikerules",     NULL,       NULL,       0,            0,           -1 },
 	/* { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 }, */
 };
 
@@ -78,10 +78,8 @@ static const char *rangercmd[]  = { "st", "-e", "ranger", NULL };
 static const char *vol_down[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
 static const char *vol_up[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
 static const char *vol_toggle[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
-static const char *brightness_two_down[] = { "xbacklight", "-dec", "2", NULL };
-static const char *brightness_ten_down[] = { "xbacklight", "-dec", "10", NULL };
-static const char *brightness_two_up[] = { "xbacklight", "-inc", "2", NULL };
-static const char *brightness_ten_up[] = { "xbacklight", "-inc", "10", NULL };
+static const char *brightness_down[] = { "sh", "/home/moritz/git/dotfiles/scripts/backlight.sh", "-5", NULL };
+static const char *brightness_up[] = { "sh", "/home/moritz/git/dotfiles/scripts/backlight.sh", "+5", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -115,10 +113,8 @@ static Key keys[] = {
 	{ 0,                            XF86AudioRaiseVolume,      spawn, {.v = vol_up } },
 	{ 0,                            XF86AudioLowerVolume,      spawn, {.v = vol_down } },
 	{ 0,                            XF86AudioMute,             spawn, {.v = vol_toggle } },
-	{ ShiftMask,                    XF86MonBrightnessUp,       spawn, {.v = brightness_two_up } },
-	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = brightness_ten_up } },
-	{ ShiftMask,                    XF86MonBrightnessDown,     spawn, {.v = brightness_two_down } },
-	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = brightness_ten_down } },
+	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = brightness_up } },
+	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = brightness_down } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
