@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
             ("convert -density %D -trim -antialias %f -quality 100 %O")))
           org-startup-with-latex-preview t
           org-enable-reveal-js-support t
-          org-reveal-root "file:///home/moritz/.reveal.js-3.7.0/"
+          org-reveal-root "file:///home/moritz/git/reveal.js/"
           org-reveal-plugins "notes"
           user-full-name "Moritz Wachsmuth-Melm"
           user-mail-adress "mail@moritzwm.de"
@@ -97,6 +97,7 @@ This function should only modify configuration layer settings."
      themes-megapack
      csv
      systemd
+     pdf
      (git :variables
           magit-repository-directories '("~/git/" . 1))
      (shell :variables
