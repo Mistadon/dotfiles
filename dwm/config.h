@@ -7,6 +7,7 @@
 #define XF86TouchpadToggle		0x1008ffa9
 #define XF86MonBrightnessUp		0x1008ff02
 #define XF86MonBrightnessDown		0x1008ff03
+#define XF86Display   0x1008ff59
 
 /* appearance */
 static const char *fonts[] = {
@@ -80,6 +81,7 @@ static const char *vol_up[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
 static const char *vol_toggle[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 static const char *brightness_down[] = { "sh", "/home/moritz/git/dotfiles/scripts/backlight.sh", "-5", NULL };
 static const char *brightness_up[] = { "sh", "/home/moritz/git/dotfiles/scripts/backlight.sh", "+5", NULL };
+static const char *configure_screens[] = { "sh", "/home/moritz/git/dotfiles/scripts/configure_screens.sh", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -115,6 +117,7 @@ static Key keys[] = {
 	{ 0,                            XF86AudioMute,             spawn, {.v = vol_toggle } },
 	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = brightness_up } },
 	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = brightness_down } },
+	{ 0,                            XF86Display,               spawn, {.v = configure_screens } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

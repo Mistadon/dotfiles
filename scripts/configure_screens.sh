@@ -1,6 +1,6 @@
 #!/bin/sh
 
-$screenlayoutdir=$dotfiles/screenlayout/$(hostname)
+screenlayoutdir=/home/moritz/git/dotfiles/screenlayout/$(hostname)
 # Read the currently connected screens and write them to ~/.screens
 xrandr -q | grep "\ connected" | sed "s/ .*//" > /home/moritz/.screens
 
