@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/bin/dmenu -fn "Hack:size=16" -nb "#f8eacf" -nf "#000000" -sb "#b3a995" -sf "#ffffff"
