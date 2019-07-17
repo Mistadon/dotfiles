@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Hack:pixelsize=20:antialias=true:autohint=true";
+static char *font = "Hack:pixelsize=22:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -103,10 +103,10 @@ static const char *colorname[] = {
   [12] = "#268bd2", /* blue    */
   [13] = "#6c71c4", /* magenta */
   [14] = "#2aa198", /* cyan    */
-  [15] = "#fdf6e3", /* white   */
+  [15] = "#586e75", /* white   */
 
   /* special colors */
-  [256] = "#f8eacf", /* background */
+  [256] = "#fdf6e3", /* background */
   [257] = "#586e75", /* foreground */
 };
 
@@ -126,6 +126,7 @@ static unsigned int defaultrcs = 257;
  */
 static unsigned int defaultitalic = 7;
 static unsigned int defaultunderline = 7;
+
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -182,7 +183,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,              XK_I,           iso14755,       {.i =  0} },
+ 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 };
 
 /*
