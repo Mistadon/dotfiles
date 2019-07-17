@@ -9,6 +9,8 @@ Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
 Plug 'w0rp/ale'
 Plug 'junegunn/vim-easy-align'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 
