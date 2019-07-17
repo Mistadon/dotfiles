@@ -4,8 +4,8 @@
 # Contributor: Grigorios Bouzakis <grbzks@gmail.com>
 
 pkgname=dwm
-pkgver=6.1
-pkgrel=3
+pkgver=6.2
+pkgrel=1
 pkgdesc="A dynamic window manager for X"
 url="http://dwm.suckless.org"
 arch=('i686' 'x86_64')
@@ -14,43 +14,26 @@ options=(zipman)
 depends=('libx11' 'libxinerama' 'libxft' 'freetype2' 'st' 'dmenu')
 install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
-	dwm.desktop
-  config.h
-  https://dwm.suckless.org/patches/systray/dwm-$pkgver-systray.diff
-  https://dwm.suckless.org/patches/attachbottom/dwm-attachbottom-$pkgver.diff
-  https://dwm.suckless.org/patches/scratchpad/dwm-scratchpad-20170207-bb3bd6f.diff
-  https://dwm.suckless.org/patches/fibonacci/dwm-fibonacci-5.8.2.diff
-  )
-
-sha256sums=('c2f6c56167f0acdbe3dc37cca9c1a19260c040f2d4800e3529a21ad7cce275fe'
-            'bc36426772e1471d6dd8c8aed91f288e16949e3463a9933fee6390ee0ccd3f81'
+	config.h
+	dwm.desktop)
+sha256sums=('97902e2e007aaeaa3c6e3bed1f81785b817b7413947f1db1d3b62b8da4cd110e'
             SKIP
-            '6fd6951cff7cddac177a92bf2243101c2c23e4023e6542b71ab520d778f94205'
-            '0e8e25bc65e96ce9276609bda3cce9792afbf7e6c6b4c1754354bdefa83a641f'
-            SKIP
-            SKIP
-            )
+            'bc36426772e1471d6dd8c8aed91f288e16949e3463a9933fee6390ee0ccd3f81')
 
 prepare() {
-  cd $srcdir/$pkgname-$pkgver
-  cp $srcdir/config.h config.h
-
-  patch -p1 -i $srcdir/dwm-$pkgver-systray.diff
-  patch -p1 -i $srcdir/dwm-attachbottom-$pkgver.diff
-  patch -p1 -i $srcdir/dwm-scratchpad-20170207-bb3bd6f.diff
-  patch -p1 -i $srcdir/dwm-fibonacci-5.8.2.diff
+  cd "$srcdir/$pkgname-$pkgver"
+  cp "$srcdir/config.h" config.h
 }
 
 build() {
-  cd $srcdir/$pkgname-$pkgver
+  cd "$srcdir/$pkgname-$pkgver"
   make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 FREETYPEINC=/usr/include/freetype2
-  rm fibonacci.c
 }
 
 package() {
-  cd $srcdir/$pkgname-$pkgver
-  make PREFIX=/usr DESTDIR=$pkgdir install
-  install -m644 -D LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
-  install -m644 -D README $pkgdir/usr/share/doc/$pkgname/README
-  install -m644 -D $srcdir/dwm.desktop $pkgdir/usr/share/xsessions/dwm.desktop
+  cd "$srcdir/$pkgname-$pkgver"
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -m644 -D README "$pkgdir/usr/share/doc/$pkgname/README"
+  install -m644 -D "$srcdir/dwm.desktop" "$pkgdir/usr/share/xsessions/dwm.desktop"
 }
