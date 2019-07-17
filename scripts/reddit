@@ -1,2 +1,2 @@
 #!/bin/sh
-surf -pgo reddit https://old.reddit.com
+surf -z 2 -pgo reddit https://old.reddit.com
