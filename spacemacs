@@ -9,7 +9,7 @@ This function should only modify configuration layer settings."
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs
+   dotspacemacs-distribution 'spacemacs-base
 
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
@@ -34,78 +34,38 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     ;; Programming languages
-     lua
-     emacs-lisp
-     ess
-     c-c++
-     (python :variables
-             python-enable-yapf-format-on-save t
-             python-sort-imports-on-save t
-             )
-
-     ;; Markup languages
-     html
-     markdown
-     bibtex
-     (org :variables
-          org-preview-latex-process-alist
-          (quote
-           ;; This will render LaTeX formulas larger, because my laptop has a high DPI screen
-           ((dvipng :programs
-                    ("latex" "dvipng")
-                    :description "dvi > png" :message "you need to install the programs: latex and dvipng." :image-input-type "dvi" :image-output-type "png" :image-size-adjust
-                    (2.0 . 2.0)
-                    :latex-compiler
-                    ("latex -interaction nonstopmode -output-directory %o %f")
-                    :image-converter
-                    ("dvipng -fg %F -bg %B -D %D -T tight -o %O %f"))
-            ("convert -density %D -trim -antialias %f -quality 100 %O")))
-          org-startup-with-latex-preview t
-          org-enable-reveal-js-support t
-          org-reveal-root "file:///home/moritz/git/reveal.js/"
-          org-reveal-plugins "notes"
-          user-full-name "Moritz Wachsmuth-Melm"
-          user-mail-adress "mail@moritzwm.de"
-          )
-     (latex :variables
-            latex-enable-folding t
-            latex-enable-auto-fill t
-            TeX-auto-save t
-            TeX-parse-self t
-            ;;latex-build-command "LatexMk"
-            TeX-master "main"
-            TeX-debug-bad-boxes t
-            TeX-debug-warnings t
-            TeX-error-overview-open-after-TeX-run t
-            TeX-view-program-selection
-            (quote
-             (((output-dvi has-no-display-manager)
-               "dvi2tty")
-              ((output-dvi style-pstricks)
-               "dvips and gv")
-              (output-dvi "xdvi")
-              (output-pdf "Zathura")
-              (output-html "xdg-open")))
-            )
-
-     ;; Utilities
+     ;; Other stuff
+     (auto-completion :variables
+                        auto-completion-enable-snippets-in-popup t)
+     better-defaults
+     git
      helm
-     ibuffer
-     spell-checking
-     syntax-checking
-     themes-megapack
-     csv
-     systemd
-     pdf
-     (git :variables
-          magit-repository-directories '("~/git/" . 1))
+     markdown
+     multiple-cursors
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     (ranger :variables
-             ;; ranger-show-preview t
-             ranger-show-hidden nil)
+     spell-checking
+     syntax-checking
+     treemacs
+
+     ;; Programming and markup languages
+     (org :variables
+          org-enable-reveal-js-support t)
+     emacs-lisp
+     python
+     c-c++
+     ess
+     html
+     bibtex
+     latex
+     lua
+     ibuffer
+     csv
+     themes-megapack
+     systemd
+     pdf
+     ranger
      )
 
    ;; List of additional packages that will be installed without being
@@ -115,7 +75,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(academic-phrases)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -228,6 +188,11 @@ It should only modify the values of Spacemacs settings."
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
 
+   ;; Default major mode for a new empty buffer. Possible values are mode
+   ;; names such as `text-mode'; and `nil' to use Fundamental mode.
+   ;; (default `text-mode')
+   dotspacemacs-new-empty-buffer-major-mode 'text-mode
+
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
 
@@ -254,10 +219,9 @@ It should only modify the values of Spacemacs settings."
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
 
-   ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
-   ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Iosevka"
-                               :size 24
+   ;; Default font or prioritized list of fonts.
+   dotspacemacs-default-font '("Hack"
+                               :size 22
                                :weight normal
                                :width normal)
 
@@ -360,6 +324,11 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil) (Emacs 24.4+ only)
    dotspacemacs-maximized-at-startup nil
 
+   ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
+   ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
+   ;; borderless fullscreen. (default nil)
+   dotspacemacs-undecorated-at-startup nil
+
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -387,10 +356,14 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-smooth-scrolling t
 
    ;; Control line numbers activation.
-   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
-   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
+   ;; `prog-mode' and `text-mode' derivatives. If set to `relative', line
+   ;; numbers are relative. If set to `visual', line numbers are also relative,
+   ;; but lines are only visual lines are counted. For example, folded lines
+   ;; will not be counted and wrapped lines are counted as multiple lines.
    ;; This variable can also be set to a property list for finer control:
    ;; '(:relative nil
+   ;;   :visual nil
    ;;   :disabled-for-modes dired-mode
    ;;                       doc-view-mode
    ;;                       markdown-mode
@@ -398,8 +371,9 @@ It should only modify the values of Spacemacs settings."
    ;;                       pdf-view-mode
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
+   ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers nil
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -507,15 +481,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  (with-eval-after-load 'org
-    (setq-default org-pretty-entities t
-                  org-hide-leading-stars t
-                  org-adapt-indentation t))
-  (defun my-org-settings ()
-    (org-indent-mode)
-    )
-  (add-hook 'org-mode-hook #'my-org-settings)
+  (spacemacs/declare-prefix "aa" "academic-phrases")
+  (spacemacs/set-leader-keys "aaa" 'academic-phrases)
+  (spacemacs/set-leader-keys "aas" 'academic-phrases-by-section)
+  (setq org-reveal-root "file:///home/moritz/git/reveal.js-3.8.0") ;; #+REVEAL_ROOT: file:///home/moritz/git/reveal.js-3.8.0
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -530,7 +499,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(package-selected-packages
+   (quote
+    (zenburn-theme zen-and-art-theme yasnippet-snippets yapfify xterm-color white-sand-theme web-mode web-beautify unfill underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit systemd sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode shell-pop seti-theme scss-mode sass-mode reverse-theme rebecca-theme ranger railscasts-theme pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme prettier-js planet-theme pippel pipenv pyvenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme orgit organic-green-theme org-ref pdf-tools key-chord ivy tablist org-re-reveal org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-bullets org-brain omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mwim mustang-theme multi-term monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme material-theme markdown-toc markdown-mode majapahit-theme magit-svn magit-gitflow magit-popup madhat2r-theme lush-theme live-py-mode light-soap-theme kaolin-themes jbeans-theme jazz-theme ir-black-theme inkpot-theme importmagic epc concurrent deferred impatient-mode simple-httpd ibuffer-projectile htmlize heroku-theme hemisu-theme helm-rtags helm-pydoc helm-org-rifle helm-gitignore request helm-git-grep helm-css-scss helm-company helm-c-yasnippet helm-bibtex parsebib hc-zenburn-theme haml-mode gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-c-style gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme fuzzy flyspell-correct-helm flyspell-correct flycheck-rtags flycheck-pos-tip pos-tip flatui-theme flatland-theme farmhouse-theme eziam-theme exotica-theme evil-org evil-magit magit transient git-commit with-editor ess-R-data-view ctable ess julia-mode espresso-theme eshell-z eshell-prompt-extras esh-help emmet-mode dracula-theme doom-themes django-theme disaster darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme csv-mode cpp-auto-include company-web web-completion-data company-statistics company-rtags rtags company-reftex company-lua lua-mode company-c-headers company-auctex company-anaconda company color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clang-format cherry-blossom-theme busybee-theme bubbleberry-theme blacken birds-of-paradise-plus-theme biblio biblio-core badwolf-theme auto-yasnippet yasnippet auto-dictionary auctex-latexmk auctex apropospriate-theme anti-zenburn-theme anaconda-mode pythonic ample-zen-theme ample-theme alect-themes afternoon-theme ac-ispell auto-complete org-plus-contrib treemacs-projectile treemacs-evil treemacs ht pfuture ace-window overseer f s nameless macrostep helm-xref helm-themes helm-swoop helm-projectile projectile helm-mode-manager helm-make helm-flx flx helm-descbinds helm-ag flycheck-package package-lint flycheck pkg-info dash epl evil-mc elisp-slime-nav auto-compile packed ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el hydra lv evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -538,17 +509,3 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  )
 )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (zenburn-theme zen-and-art-theme yapfify xterm-color xkcd ws-butler winum white-sand-theme web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spaceline powerline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme reverse-theme restart-emacs rebecca-theme ranger rainbow-delimiters railscasts-theme pyvenv pytest pyenv-mode py-isort purple-haze-theme professional-theme popwin planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el paradox spinner orgit organic-green-theme org-ref pdf-tools key-chord ivy tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme neotree naquadah-theme mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme magit-gitflow madhat2r-theme macrostep lush-theme lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint light-soap-theme json-snatcher js2-refactor yasnippet multiple-cursors js-doc jbeans-theme jazz-theme ir-black-theme inkpot-theme indent-guide hy-mode dash-functional hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation heroku-theme hemisu-theme helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-bibtex parsebib helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gandalf-theme flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx flatui-theme flatland-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub treepy graphql with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight espresso-theme eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump dracula-theme django-theme diminish define-word darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clean-aindent-mode cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme bind-map bind-key biblio biblio-core badwolf-theme auto-highlight-symbol auto-dictionary auto-compile packed apropospriate-theme anti-zenburn-theme anaconda-mode pythonic ample-zen-theme ample-theme alect-themes afternoon-theme ace-link ace-jump-helm-line helm helm-core popup which-key undo-tree org-plus-contrib json-mode js2-mode hydra evil-unimpaired f s csv-mode coffee-mode auctex async aggressive-indent adaptive-wrap ace-window avy solarized-theme dash))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
