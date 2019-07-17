@@ -7,6 +7,13 @@ alias pip='pip --user'
 
 wm="dwm"
 
+# Execute lightdm once if ~/lightdm exists
+if [ -f "$HOME/lightdm" ]; then
+    rm "$HOME/lightdm"
+    wm="none"
+    sudo systemctl start lightdm
+fi
+
 if [ "$wm" = "dwm" ] && [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
     exec startx
 fi
@@ -14,5 +21,26 @@ fi
 if [ "$wm" = "sway" ] && [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   export XKB_DEFAULT_LAYOUT=us_custom,de
   export XKB_DEFAULT_OPTIONS=grp:caps_toggle
+
+  # Set GUI libraries to wayland
+  export GDK_BACKEND=wayland # GTK
+
+  export QT_QPA_PLATFORM=wayland-egl # QT
+
+  export CLUTTER_BACKEND=wayland # Clutter
+
+  export SDL_VIDEODRIVER=wayland # SDL (some steam games don't start anymore with it)
+
+  export ECORE_EVAS_ENGINE=wayland_egl # EFL (or: wayland_shm)
+  export ELM_DISPLAY=wl # also EFL, apps that use elementary
+  export ELM_ACCEL=gl
+
+  # Bemenu (dmenu replacement for wayland)
+  export BEMENU_BACKEND=wayland
+
+  # Firefox
+  export MOZ_ENABLE_WAYLAND=1
+  export MOZ_WEBRENDER=1 # For the new webrender backend of Firefox
+
   exec sway
 fi
