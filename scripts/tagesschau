@@ -1,0 +1,3 @@
+#!/bin/sh
+url="https://tagesschau.de$(curl https://www.tagesschau.de/ | grep -P 'multimedia/sendung/ts-[\d]*.html' -m 1 | sed 's/^<a class="mediaLink" href="//;s/"><img alt="Sendungsbild".*$//')"
+mpv "$url"
