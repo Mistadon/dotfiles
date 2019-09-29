@@ -64,7 +64,8 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *duckduckgocmd[] = { "duckduckgo", NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *rangercmd[]  = { "st", "-e", "ranger", NULL };
+static const char *filemancmd[]  = { "st", "-e", "ranger", NULL };
+static const char *calendarcmd[]  = { "st", "-e", "calcurse", NULL };
 static const char *vol_down[] = { "bash", "/home/moritz/git/dotfiles/scripts/set_volume.sh", "-5%", NULL };
 static const char *vol_up[] = { "bash", "/home/moritz/git/dotfiles/scripts/set_volume.sh", "+5%", NULL };
 static const char *vol_toggle[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
@@ -72,12 +73,14 @@ static const char *brightness_down[] = { "bash", "/home/moritz/git/dotfiles/scri
 static const char *brightness_up[] = { "bash", "/home/moritz/git/dotfiles/scripts/backlight.sh", "inc", NULL };
 static const char *configure_screens[] = { "bash", "/home/moritz/git/dotfiles/scripts/configure_screens.sh", NULL };
 static const char *toggle_systray[] = {"bash", "/home/moritz/git/dotfiles/scripts/toggle_tray.sh", NULL };
+static const char *dis_screen_cmd[] = {"xbacklight", "-set", "0", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = duckduckgocmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = rangercmd } },
+	{ MODKEY,             		XK_c,      spawn,          {.v = calendarcmd } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = filemancmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -106,6 +109,7 @@ static Key keys[] = {
 	{ 0,                            XF86AudioMute,             spawn, {.v = vol_toggle } },
 	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = brightness_up } },
 	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = brightness_down } },
+	{ ShiftMask,                    XF86MonBrightnessDown,     spawn, {.v = dis_screen_cmd } },
 	{ 0,                            XF86Display,               spawn, {.v = configure_screens } },
     { MODKEY,                       XK_grave,                  spawn, {.v = toggle_systray } },
 	TAGKEYS(                        XK_1,                      0)
