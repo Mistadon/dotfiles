@@ -11,6 +11,7 @@ udiskie -s & # Udiskie, automounts thumb drives
 nextcloud & # Nextcloud
 nm-applet & # Networkmanager
 caffeine & # Caffeine
+dunst & 
 
 # Kill systray, it's annoying and can be started on demand. Only needs to start so I don't have a nextcloud popup
 sleep 2 && pkill stalonetray &
