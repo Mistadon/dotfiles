@@ -5,13 +5,6 @@
 # the actual brightness. This way, at lower brightness, there are more fine
 # steps and at higher brightness, larger steps. This is much more close to the
 # brightness humans perceive.
-# This script introduces a slight lag when adjusting the brightness, but who
-# cares?
-# I might adjust the function at some point, but it is good for now.
-
-# increases/decreases brightness (perceived) brightness
-# $1 is current brightness, $1 is +/-5 or so
-# In case of 0+5, adjust to 10, because otherwise the screen won't turn on
 
 # associative array of brightness values (from (brightness in percent)^2/100)
 declare -A values
@@ -39,7 +32,7 @@ values[20]=100
 
 # Get current brightness index (of $1)
 function getindex {
-    for index in {1..20}; do
+    for index in {0..20}; do
         if [ ${values[$index]} -ge $1 ]; then
             index=$index
             return
