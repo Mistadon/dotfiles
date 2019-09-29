@@ -1,3 +1,6 @@
+"""""""""""""""""""""""""""""""""""
+" Non-plugin specific keybindings "
+"""""""""""""""""""""""""""""""""""
 let mapleader = ","
 let maplocalleader = ","
 
@@ -14,9 +17,6 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 "disable highlight 
 map <silent> <leader><cr> :noh<cr>
-
-"Nerdtree toggle
-map <C-n> :NERDTreeToggle<CR>
 
 " map space to search
 map <space> /
@@ -62,13 +62,6 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
-" Vim easy align
-" Keybindings from the readme:
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-" xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-" nmap ga <Plug>(EasyAlign)
-"
-" My own keybindings:
-" Auto-align the current table in LaTeX with vim-easy-align
-nmap <localleader>la vie<Plug>(EasyAlign)*&
+" Move up and down wrapped lines (useful because of autolinebreak via tw=80)
+map j gj
+map k gk
