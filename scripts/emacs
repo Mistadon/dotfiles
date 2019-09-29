@@ -1,0 +1,3 @@
+#!/bin/sh
+# Try connecting to emacs daemon. If it doesn't work, start daemon and try again
+/usr/bin/emacsclient -c $@ || (/usr/bin/emacs --bg-daemon && /usr/bin/emacsclient -c $@)
