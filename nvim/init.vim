@@ -66,14 +66,14 @@ set nobackup
 set nowb
 
 " Use spaces instead of tabs
-set expandtab
-set smarttab
-set shiftwidth=4
-set tabstop=4
+" set expandtab
+" set smarttab
+" set shiftwidth=4
+" set tabstop=4
 
-"Linebreak on 500 characters
+"Linebreak on 80 characters
 set lbr
-set tw=500
+set tw=80
 
 set ai "auto indent
 set si "smart indent
