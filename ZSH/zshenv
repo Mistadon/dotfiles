@@ -3,9 +3,22 @@
 export PATH="/home/moritz/.local/bin:${PATH}"
 
 # Environment variables
-export TERM='st'
+export TERM=st
+export VISUAL=emacs
+export EDITOR=vim
+export PAGER=less
+export FILEMANAGER=ranger
+if [ -n "$DISPLAY" ]; then
+    export BROWSER=firefox
+else 
+    export BROWSER=links
+fi
+
 export GDK_SCALE=1.5
-export EDITOR='vim'
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 export LANG="en_US.UTF-8"
 export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab
+
+# NNN configuration
+#export NNN_OPENER=open
+export NNN_USE_EDITOR=vim
