@@ -66,6 +66,7 @@ static const char *duckduckgocmd[] = { "duckduckgo", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *filemancmd[]  = { "st", "-e", "ranger", NULL };
 static const char *calendarcmd[]  = { "st", "-e", "calcurse", NULL };
+static const char *appointmentscmd[]  = { "sh", "/home/moritz/git/dotfiles/scripts/appointments", NULL };
 static const char *vol_down[] = { "bash", "/home/moritz/git/dotfiles/scripts/set_volume.sh", "-5%", NULL };
 static const char *vol_up[] = { "bash", "/home/moritz/git/dotfiles/scripts/set_volume.sh", "+5%", NULL };
 static const char *vol_toggle[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
@@ -80,6 +81,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = duckduckgocmd } },
 	{ MODKEY,             		XK_c,      spawn,          {.v = calendarcmd } },
+	{ MODKEY|ShiftMask,            	XK_c,      spawn,          {.v = appointmentscmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = filemancmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
