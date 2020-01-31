@@ -72,8 +72,8 @@ set nowb
 " set tabstop=4
 
 "Linebreak on 80 characters
-set lbr
-set tw=80
+" set lbr
+" set tw=80
 
 set ai "auto indent
 set si "smart indent

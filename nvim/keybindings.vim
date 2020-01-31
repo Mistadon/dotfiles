@@ -18,6 +18,14 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 "disable highlight 
 map <silent> <leader><cr> :noh<cr>
 
+" format the current paragraph
+map <leader>fp gqip
+" remove double (and more) spaces (happens when formatting)
+" and spaces the beginning of lines
+map <leader>fs :%s/\ \ \ */\ /g<cr>:%s/^\ \ *//g<cr>
+" quickly do both and disable highlighting
+map <silent> <leader>ff <leader>fp<leader>fs:noh<cr>
+
 " map space to search
 map <space> /
 map <c-space> ?
