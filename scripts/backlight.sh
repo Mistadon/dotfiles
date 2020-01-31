@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # There is a difference between the actual brightness of a screen (the power
 # output) and the perceived brightness (the one we see). This script is supposed
 # to compensate for this difference by applying the formula f(x) = x^2 / 100 to
@@ -6,53 +6,42 @@
 # steps and at higher brightness, larger steps. This is much more close to the
 # brightness humans perceive.
 
-# associative array of brightness values (from (brightness in percent)^2/100)
-declare -A values
-values[0]=0
-values[1]=1
-values[2]=2
-values[3]=3
-values[4]=4
-values[5]=6
-values[6]=9
-values[7]=12
-values[8]=16
-values[9]=20
-values[10]=25
-values[11]=30
-values[12]=36
-values[13]=42
-values[14]=49
-values[15]=56
-values[16]=64
-values[17]=72
-values[18]=81
-values[19]=90
-values[20]=100
 
-# Get current brightness index (of $1)
-function getindex {
-    for index in {0..20}; do
-        if [ ${values[$index]} -ge $1 ]; then
-            index=$index
-            return
-        fi
-    done
+brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+max_brightness=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+steps=20
 
+function step_brightness {
+	if [ $1 -gt 20 ]; then
+		echo $max_brightness
+	elif [ $1 -lt 0 ]; then
+		echo 0
+	else
+		echo $(( ($max_brightness*$1/$steps)**2/$max_brightness ))
+	fi
 }
+
+function set_brightness {
+	echo $1 > /sys/class/backlight/intel_backlight/brightness
+	echo "Set brightness to: $1"
+}
+
 function inc {
-    if [ $index -lt 20 ]; then
-        ((index = $index + 1))
-    fi
-}
-function dec {
-    if [ $index -gt 0 ]; then
-        ((index = $index - 1))
-    fi
+	for ((step=0; step<=steps; step++)); do
+		if [ $(step_brightness $step) -gt $brightness ]; then
+			set_brightness $(step_brightness $(( $step + ${1:-1} - 1)) )
+			return
+		fi
+	done
 }
 
-getindex $(xbacklight -get)
-$1
-xbacklight -set ${values[$index]}
-date +%s > /run/user/$(id -u)/tmp_status
-sh ~/git/dotfiles/scripts/set_status.sh "Set brightness to ${values[$index]}"
+function dec {
+	for ((step=steps; step>=0; step--)); do
+		if [ $(step_brightness $step) -lt $brightness ]; then
+			set_brightness $(step_brightness $(( $step - ${1:-1} + 1)))
+			return
+		fi
+	done
+}
+$@
+notify-send "Set"
