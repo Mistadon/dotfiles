@@ -9,16 +9,7 @@ zstyle :compinstall filename '/home/moritz/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
-# Launch tmux (snippet taken from the arch wiki)
-# On launch, try to attach to a detached session. If none exist, create a new one
-# I added the "&& exit" parts, so I don't have to type exit twice to close a terminal window
-if [[ -z "$TMUX" ]] ;then
-    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
-    if [[ -z "$ID" ]] ;then # if not available create a new one
-        tmux new-session && exit
-    else
-        tmux attach-session -t "$ID" && exit # if available attach to it
-    fi
-fi
+fortune | cowsay | lolcat
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

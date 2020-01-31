@@ -1,10 +1,10 @@
 # Adds ~/.local/bin to the PATH.
 # This allows me to add some functionality to certain executables, such as a better scaling factor for java applications and spotify and different languages for certain applications (e.g. gnucash)
-export PATH="/home/moritz/.local/bin:${PATH}"
+export PATH="/home/moritz/.local/bin:/opt/imod/bin:${PATH}"
 
 # Environment variables
-export TERM=st
-export VISUAL=emacs
+export TERM=termite
+export VISUAL=vim
 export EDITOR=vim
 export PAGER=less
 export FILEMANAGER=ranger
@@ -19,6 +19,9 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 export LANG="en_US.UTF-8"
 export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab
 
+export BQ_CUPS="quantinfra.bioquant.uni-heidelberg.de:631"
+
 # NNN configuration
 #export NNN_OPENER=open
 export NNN_USE_EDITOR=vim
+export XDG_CONFIG_HOME="$HOME/.config"
