@@ -1,0 +1,40 @@
+#!/bin/bash
+# set bspwm status bar text
+# script idea from here: https://gitlab.com/snippets/1863242
+# and here: https://github.com/magdeoz/dotfiles/blob/master/.themes/bspwm/Powerline/
+
+FIFO=$(bspc subscribe -f)
+
+# Right side
+bat_percent() { read -r bat_percent </sys/class/power_supply/BAT0/capacity
+                read -r bat_status </sys/class/power_supply/BAT0/status
+            }
+date_time() { date_time="$(date +"%A, %d %B %Y | %R")"; }
+
+every() { [ $((${round:=0} % ${1:-1})) -eq 0 ]; }
+while :; do
+	every 1 && {
+		date_time
+	}
+	every 10 && {
+		bat_percent
+	}
+
+	echo "%{r} ${bat_percent}% (${bat_status}) | ${date_time} "
+	round=$((round + 1))
+	sleep 1
+done > $FIFO &
+
+
+# Concatenate
+while read -r line; do
+	case $line in
+		"%{r}"*)
+			right_side="$line |                "
+			;;
+		"W"*)
+			left_side=$(echo $line | awk -f $(dirname $0)/bspc_format.awk -)
+			;;
+		esac
+	echo -e "$left_side $right_side" | tr '\n' ' '
+done < $FIFO | lemonbar -B "#f0e1c0" -F "#000000" -f "Hack 14" -f "Font Awesome 5 Free:style=regular" -f "Font Awesome 5 Free:style=solid" | sh
