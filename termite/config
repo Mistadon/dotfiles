@@ -51,52 +51,44 @@ scrollback_lines = 10000
 #border_width = 0.5
 #roundness = 2.0
 
+# Generated using https://terminal.sexy
 [colors]
-# Base16 Solarized Light
-# Author: Ethan Schoonover (modified by aramisgithub)
 
-foreground          = #586e75
-foreground_bold     = #073642
-cursor              = #073642
-cursor_foreground   = #fdf6e3
-background          = rgba(253, 246, 227)
+# special
+foreground      = #586e75
+foreground_bold = #586e75
+cursor          = #586e75
+background      = #fdf6e3
 
-# 16 color space
+# black
+color0  = #002b36
+color8  = #657b83
 
-# Black, Gray, Silver, White
-color0  = #fdf6e3
-color8  = #839496
-color7  = #586e75
-color15 = #002b36
-
-# Red
+# red
 color1  = #dc322f
 color9  = #dc322f
 
-# Green
+# green
 color2  = #859900
 color10 = #859900
 
-# Yellow
+# yellow
 color3  = #b58900
 color11 = #b58900
 
-# Blue
+# blue
 color4  = #268bd2
 color12 = #268bd2
 
-# Purple
+# magenta
 color5  = #6c71c4
 color13 = #6c71c4
 
-# Teal
+# cyan
 color6  = #2aa198
 color14 = #2aa198
 
-# Extra colors
-color16 = #cb4b16
-color17 = #d33682
-color18 = #eee8d5
-color19 = #93a1a1
-color20 = #657b83
-color21 = #073642
+# white
+color7  = #93a1a1
+color15 = #586e75
+
