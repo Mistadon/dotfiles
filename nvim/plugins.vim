@@ -3,21 +3,47 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'davidhalter/jedi'
 Plug 'zchee/deoplete-jedi'
-" Utilities
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'w0rp/ale'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'majutsushi/tagbar'
-Plug 'vim-syntastic/syntastic'
+
+" Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Document/markup languages
+
+" Nerdtree
+Plug 'scrooloose/nerdtree'
+" Keeps nerdtree in sync between tabs
+Plug 'jistr/vim-nerdtree-tabs'
+
+" Nerdcommenter
+Plug 'scrooloose/nerdcommenter'
+
+" Linting
+Plug 'w0rp/ale'
+
+" Fuzzy file finder
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+
+" Tags
+Plug 'majutsushi/tagbar'
+
+" Github integration
+Plug 'tpope/vim-fugitive'
+
+" Latex
 Plug 'lervag/vimtex'
+
+" Markdown
 Plug 'godlygeek/tabular' " Required for vim-markdown
 Plug 'plasticboy/vim-markdown'
-" Programming languages
+
+" 
+Plug 'vim-syntastic/syntastic'
+
+" Python
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
+
+" Rust
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 
@@ -60,12 +86,17 @@ call deoplete#custom#option({
 """"""""""""""""""""""""
 " Tagbar configuration "
 """"""""""""""""""""""""
+map <C-m> :TagbarToggle<CR>
 
 """""""
 " ALE "
 """""""
 " Auto-fix on save
 let g:ale_fix_on_save = 1
+" Use ale as completion source for all code
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
 
 """"""""""""""""""""""""""
 " NerdTree configuration "

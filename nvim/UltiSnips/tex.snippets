@@ -1,9 +1,10 @@
+# extends academic-phrases
 snippet graphic "includegraphics"
 \includegraphics[width=${1:\textwidth}]{${2:figures/}}$0
 endsnippet
 
 snippet frame "Beamer class frame"
-\begin{frame}{$1}{$2}
+\begin{frame}{$1}{$2} \centering
 	$0
 \end{frame}
 endsnippet

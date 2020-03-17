@@ -73,3 +73,14 @@ map <leader>s? z=
 " Move up and down wrapped lines (useful because of autolinebreak via tw=80)
 map j gj
 map k gk
+
+" Switch buffer with SPACE + <number> (like in spacevim)
+nnoremap <space>1 1<C-w>w
+nnoremap <space>2 2<C-w>w
+nnoremap <space>3 3<C-w>w
+nnoremap <space>4 4<C-w>w
+nnoremap <space>5 5<C-w>w
+nnoremap <space>6 6<C-w>w
+nnoremap <space>7 7<C-w>w
+nnoremap <space>8 8<C-w>w
+nnoremap <space>9 9<C-w>w

@@ -1,6 +1,8 @@
 " line of history to remember 
 set history=500
 
+"Enable syntax highlighting
+syntax enable
 syntax on
 
 " Enable filetype plugins
@@ -12,6 +14,7 @@ set autoread
 
 " Set number display
 set number
+set relativenumber
 
 "Fast search
 set wildmenu
@@ -49,9 +52,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-"Enable syntax highlighting
-syntax enable
-
 set t_Co=256
 set t_ut=
 set background=light
@@ -85,5 +85,18 @@ set noshowmode
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
+" Share the VIM clipboard with the X11 clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
+ 
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
+
 source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/keybindings.vim
+
+" Remove some clipboard stuff to start VIM faster. See
+" https://stackoverflow.com/questions/14635295/vim-takes-a-very-long-time-to-start-up
+" set clipboard=exclude:.*
