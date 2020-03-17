@@ -12,7 +12,7 @@ XF86AudioMute
 
 # Applications
 alt + Return
-	$TERM -e ranger
+	$TERM -e hunter
 alt + shift + Return
 	$TERM
 alt + d
