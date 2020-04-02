@@ -65,7 +65,6 @@ This function should only modify configuration layer settings."
      themes-megapack
      systemd
      pdf
-     ranger
      )
 
    ;; List of additional packages that will be installed without being
