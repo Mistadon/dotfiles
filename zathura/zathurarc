@@ -1,1 +1,5 @@
 set selection-clipboard clipboard
+# Abbreviate /home/moritz/ to ~/
+set statusbar-home-tilde
+# Disable status bar (enable with C-n)
+set guioptions ""
