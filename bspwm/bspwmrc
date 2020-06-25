@@ -1,11 +1,26 @@
-#!/bin/sh
-
-
-sxhkd &
+#!/bin/bash
 xsetroot -cursor_name left_ptr
-bash $HOME/git/dotfiles/bspwm/configure_screens.sh
-bash $HOME/git/dotfiles/scripts/autostart.sh
 
+# Auto-connect all screens
+
+# Setup theme
+source $HOME/git/dotfiles/themes/solarized_light.sh
+
+#========================#
+# Autostart applications #
+#========================#
+sxhkd & # Manages keybindings
+compton -b # Compositor
+udiskie -t & # Udiskie, automounts thumb drives
+nextcloud & # Nextcloud
+caffeine & # Caffeine
+nm-applet & # Networkmanager
+dunst & # Notification daemon
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # Graphical authentication agent
+
+#===========================#
+# BSPC calls (bspwm config) #
+#===========================#
 bspc config border_width         2
 bspc config window_gap          12
 

@@ -1,9 +1,6 @@
-#!/bin/sh
-
+#!/bin/bash
 userresources=$HOME/.Xresources
 sysresources=/etc/X11/xinit/.Xresources
-dotfiles=$HOME/git/dotfiles
-wallpapers=$HOME/Nextcloud/misc/wallpapers
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
@@ -21,15 +18,24 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-# Set background
-feh --bg-fill $wallpapers/radium.jpg
+#==========================#
+# Custom stuff starts here #
+#==========================#
 # Set keyboard layout
 setxkbmap -layout us_custom,de -option grp:caps_toggle
+# Set cursor
+xsetroot -cursor_name left_ptr
 
-# Turn off sound
-# This is a laptop, I don't want loud youtube videos blasting in lectures
-pactl set-sink-mute 0 1
-pactl set-sink-volume 0 0
+# Keyring
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+
+if [ "$(hostname)" = "moritz-arch" ]; then
+	# Turn off sound
+	# This is a laptop, I don't want loud youtube videos blasting in lectures
+	pactl set-sink-mute 0 1
+	pactl set-sink-volume 0 0
+fi
 
 # Start WM
 exec bspwm
