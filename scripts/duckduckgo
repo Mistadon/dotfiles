@@ -1,5 +1,0 @@
-#!/bin/sh
-[ $1 ] && startpage=$1 || startpage='https://start.duckduckgo.com'
-cd ~/Downloads
-tabbed -fr2 surf -pge x -o forget $startpage
-rm -r ~/.surf/forget

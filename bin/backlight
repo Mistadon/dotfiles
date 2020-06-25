@@ -44,4 +44,3 @@ function dec {
 	done
 }
 $@
-notify-send "Set"

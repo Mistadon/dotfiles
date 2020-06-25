@@ -1,0 +1,5 @@
+#!/bin/sh
+# I'm a german learning spanish. In Anki, it's super useful to have the spanish and german keyboards so that's what this script does.
+setxkbmap -layout de,es -option grp:caps_toggle
+/usr/bin/anki
+setxkbmap -layout us_custom,de -option grp:caps_toggle
