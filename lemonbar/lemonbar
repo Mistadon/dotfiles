@@ -3,8 +3,6 @@
 # script idea from here: https://gitlab.com/snippets/1863242
 # and here: https://github.com/magdeoz/dotfiles/blob/master/.themes/bspwm/Powerline/
 
-FIFO=$(bspc subscribe -f)
-
 # Right side
 bat_percent() { read -r bat_percent </sys/class/power_supply/BAT0/capacity
                 read -r bat_status </sys/class/power_supply/BAT0/status
@@ -23,10 +21,9 @@ while :; do
 	echo "%{r} ${bat_percent}% (${bat_status}) | ${date_time} "
 	round=$((round + 1))
 	sleep 1
-done > $FIFO &
+done > $BSPWM_FIFO &
 
 
-# Concatenate
 while read -r line; do
 	case $line in
 		"%{r}"*)
@@ -35,6 +32,12 @@ while read -r line; do
 		"W"*)
 			left_side=$(echo $line | awk -f $(dirname $0)/bspc_format.awk -)
 			;;
+		"FOREGROUND=#"*)
+			FOREGROUND=${line/*=/}
+			;;
+		"BACKGROUND=#"*)
+			BACKGROUND=${line/*=/}
+			;;
 		esac
-	echo -e "$left_side $right_side" | tr '\n' ' '
-done < $FIFO | lemonbar -B "#f0e1c0" -F "#000000" -f "Hack 14" -f "Font Awesome 5 Free:style=regular" -f "Font Awesome 5 Free:style=solid" | sh
+	echo -e "%{F${FOREGROUND:-#000000}}%{B${BACKGROUND:-#ffffff}}$left_side $right_side" | tr '\n' ' '
+done <$BSPWM_FIFO | lemonbar -f "Hack 14" -f "Font Awesome 5 Free:style=regular" -f "Font Awesome 5 Free:style=solid" | sh
