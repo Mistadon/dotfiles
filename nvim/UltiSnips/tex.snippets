@@ -1,6 +1,63 @@
 # extends academic-phrases
+
+############
+# Graphics #
+############
 snippet graphic "includegraphics"
 \includegraphics[width=${1:\textwidth}]{${2:figures/}}$0
+endsnippet
+
+
+#########
+# Lists #
+#########
+snippet itemize "Itemize"
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+
+##########
+# Tables #
+##########
+snippet tabularx "TabularX table"
+\begin{tabularx}{${1:\textwidth}}{${2:ccc}}
+	\toprule
+	$3
+	\midrule
+	$0
+	\bottomrule
+\end{tabularx}
+endsnippet
+
+snippet table "Table"
+\begin{table}[htbp]
+	\centering
+	\caption{$3\label{tab:$4}}
+	\begin{tabular}{${2:rlc}}
+	\toprule
+	$1
+	\midrule
+	$0
+	\bottomrule
+	\end{tabular}
+\end{table}
+endsnippet
+
+
+##########
+# Beamer #
+##########
+snippet col2 "Two-column layout for beamer"
+\begin{columns}
+	\begin{column}{${1:.5\textwidth}}
+		$0
+	\end{column}
+	\begin{column}{${2:.5\textwidth}}
+		
+	\end{column}
+\end{columns}
 endsnippet
 
 snippet frame "Beamer class frame"
@@ -8,3 +65,4 @@ snippet frame "Beamer class frame"
 	$0
 \end{frame}
 endsnippet
+
