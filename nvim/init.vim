@@ -96,6 +96,7 @@ endif
 
 source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/keybindings.vim
+source ~/.config/nvim/colors.vim
 
 " Remove some clipboard stuff to start VIM faster. See
 " https://stackoverflow.com/questions/14635295/vim-takes-a-very-long-time-to-start-up
