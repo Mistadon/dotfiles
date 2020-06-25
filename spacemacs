@@ -504,6 +504,8 @@ before packages are loaded."
   ;; Use :ignore: on headings so that they are not exported
   (require 'ox-extra)
   (ox-extras-activate '(ignore-headlines))
+  ;; Use latexmk so that references work
+  (setq org-latex-pdf-process '("latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf -bibtex -f %f"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -567,6 +569,8 @@ This function is called at the very end of Spacemacs initialization."
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(org-agenda-files (quote ("~/Nextcloud/todo.org")))
+ '(org-image-actual-width nil)
+ '(org-latex-bib-compiler "biber")
  '(org-latex-classes
    (quote
     (("mimosis" "\\documentclass{mimosis}"
@@ -597,6 +601,7 @@ This function is called at the very end of Spacemacs initialization."
       ("\\section{%s}" . "\\section*{%s}")
       ("\\subsection{%s}" . "\\subsection*{%s}")
       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
+ '(org-latex-image-default-width "")
  '(org-latex-prefer-user-labels t)
  '(package-selected-packages
    (quote
