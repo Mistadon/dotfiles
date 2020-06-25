@@ -1,3 +1,6 @@
 [submodule "rofi"]
 	path = rofi
 	url = https://github.com/adi1090x/rofi
+[submodule "submodules/sdushantha_dotfiles"]
+	path = submodules/sdushantha_dotfiles
+	url = https://github.com/sdushantha/dotfiles
