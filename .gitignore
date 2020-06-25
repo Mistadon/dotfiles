@@ -1,11 +1,12 @@
-.screenlayout/screens
 GTK/gtk-3.0/bookmarks
 GTK/gtk-3.0/servers
-vim/snippets/honza.snippets
+
 nvim/spell
+
 ranger/tagged
 ranger/bookmarks
 ranger/history
+
 dwm/src
 dwm/pkg
 dwm/*.diff
@@ -26,3 +27,5 @@ st/*.tar.xz
 st/st
 st/.*
 st/PKGBUILD
+
+termite/config
