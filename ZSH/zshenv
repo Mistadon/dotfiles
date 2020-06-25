@@ -3,7 +3,6 @@
 export PATH="/home/moritz/.local/bin:/opt/imod/bin:${PATH}"
 
 # Environment variables
-export TERM=termite
 export VISUAL=vim
 export EDITOR=vim
 export PAGER=less
@@ -20,8 +19,4 @@ export LANG="en_US.UTF-8"
 export JUPYTERLAB_DIR=$HOME/.local/share/jupyter/lab
 
 export BQ_CUPS="quantinfra.bioquant.uni-heidelberg.de:631"
-
-# NNN configuration
-#export NNN_OPENER=open
-export NNN_USE_EDITOR=vim
 export XDG_CONFIG_HOME="$HOME/.config"

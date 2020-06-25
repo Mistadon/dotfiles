@@ -5,34 +5,30 @@ alias java='java -Dsun.java2d.uiScale=2'
 alias tmux="tmux -2"
 alias pip='pip --user'
 
+function c() {
+	cd $* && ls -lh
+}
+
 wm="X"
 
-if [ -f "$HOME/.lightdm" ] || [ "$wm" = "lightdm" ]; then
-	rm "$HOME/.lightdm"
-	sudo systemctl start lightdm
-elif [ "$wm" = "X" ] && [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    exec startx
-elif [ "$wm" = "sway" ] && [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-  # Set GUI libraries to wayland
-  export GDK_BACKEND=wayland # GTK
-
-  export QT_QPA_PLATFORM=wayland-egl # QT
-
-  export CLUTTER_BACKEND=wayland # Clutter
-
-  export SDL_VIDEODRIVER=wayland # SDL (some steam games don't start anymore with it)
-
-  export ECORE_EVAS_ENGINE=wayland_egl # EFL
-  #export ECORE_EVAS_ENGINE=wayland_shm # EFL
-  export ELM_DISPLAY=wl # also EFL, apps that use elementary
-  export ELM_ACCEL=gl
-
-  # Bemenu (dmenu replacement for wayland)
-  export BEMENU_BACKEND=wayland
-
-  # Firefox
-  export MOZ_ENABLE_WAYLAND=1
-  export MOZ_WEBRENDER=1 # For the new webrender backend of Firefox
-
-  exec sway
+if [ -n "$(systemctl show gdm | grep UnitFileState=disabled)" ]; then
+	if [ "$wm" = "X" ] && [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+		exec startx	
+	elif [ "$wm" = "sway" ] && [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+  		# Set GUI libraries to wayland
+  		export GDK_BACKEND=wayland # GTK
+  		export QT_QPA_PLATFORM=wayland-egl # QT
+  		export CLUTTER_BACKEND=wayland # Clutter
+  		export SDL_VIDEODRIVER=wayland # SDL (some steam games don't start anymore with it)
+  		export ECORE_EVAS_ENGINE=wayland_egl # EFL
+  		#export ECORE_EVAS_ENGINE=wayland_shm # EFL
+  		export ELM_DISPLAY=wl # also EFL, apps that use elementary
+  		export ELM_ACCEL=gl
+  		# Bemenu (dmenu replacement for wayland)
+  		export BEMENU_BACKEND=wayland
+  		# Firefox
+  		export MOZ_ENABLE_WAYLAND=1
+  		export MOZ_WEBRENDER=1 # For the new webrender backend of Firefox
+  		exec sway
+	fi
 fi
