@@ -11,7 +11,7 @@ XF86AudioMute
 	pactl set-sink-mute @DEFAULT_SINK@ toggle
 # Open arandr, reload polybar afterwards
 XF86Display
-	$XDG_CONFIG_HOME/polybar/arandr.sh
+	arandr
 # Circle monitors (affects the desktop indices)
 shift + XF86Display
 	set -- $(bspc query -M --names);\

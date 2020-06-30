@@ -1,0 +1,4 @@
+#!/bin/bash
+# Wrapper around arandr to restart polybar on all connected monitors after arandr quits
+/usr/bin/arandr
+$XDG_CONFIG_HOME/polybar/launch.sh
