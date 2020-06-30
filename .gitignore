@@ -29,4 +29,5 @@ st/.*
 st/PKGBUILD
 
 termite/config
+bat/config
 nvim/colors.vim
