@@ -27,6 +27,7 @@ Plug 'junegunn/fzf.vim'
 " Color schemes
 Plug 'altercation/vim-colors-solarized'
 Plug 'sickill/vim-monokai'
+Plug 'sainnhe/forest-night'
 
 " Airline statusbar
 Plug 'vim-airline/vim-airline'

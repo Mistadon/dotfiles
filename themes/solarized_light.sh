@@ -61,7 +61,7 @@ BAT_CONFIG="\
 --theme='Solarized (light)'
 "
 
-WALLPAPER="$HOME/Nextcloud/misc/wallpapers/radium.jpg"
+export WALLPAPER="$HOME/Nextcloud/misc/wallpapers/radium.jpg"
 
 
 for file in $HOME/git/dotfiles/themes/apps/*; do
