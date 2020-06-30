@@ -1,14 +1,17 @@
 #!/bin/bash
 xsetroot -cursor_name left_ptr
 
-# Auto-connect all screens
+# Set resolution and launch polybar
+xrandr --output eDP1 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
+bspc monitor eDP1 -d I II III IV V VI VII VIII IX X
 
 # Setup theme
-source $HOME/git/dotfiles/themes/solarized_light.sh
+source $HOME/git/dotfiles/themes/forest_night.sh
 
 #========================#
 # Autostart applications #
 #========================#
+$XDG_CONFIG_HOME/polybar/launch.sh
 sxhkd & # Manages keybindings
 compton -b # Compositor
 udiskie -t & # Udiskie, automounts thumb drives
