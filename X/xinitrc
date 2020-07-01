@@ -33,8 +33,10 @@ export SSH_AUTH_SOCK
 if [ "$(hostname)" = "moritz-arch" ]; then
 	# Turn off sound
 	# This is a laptop, I don't want loud youtube videos blasting in lectures
+	# Also, the mic should be switched off
 	pactl set-sink-mute 0 1
 	pactl set-sink-volume 0 0
+	pactl set-source-mute 2 1
 fi
 
 # Start WM
