@@ -12,9 +12,10 @@ XF86AudioMute
 XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-# Open arandr, reload polybar afterwards
 XF86Display
-	arandr
+	/usr/bin/arandr;\
+	$XDG_CONFIG_HOME/polybar/launch.sh
+#
 # Circle monitors (affects the desktop indices)
 shift + XF86Display
 	set -- $(bspc query -M --names);\
@@ -71,10 +72,10 @@ alt + {_,shift + }c
 
 # move current desktop to next monitor and focus
 alt + bracket{left,right}
-  desk=`bspc query -D -d focused`; \
-  bspc desktop -m {prev,next}; \
-  bspc monitor -f {prev,next}; \
-  bspc desktop -f $desk
+	desk=`bspc query -D -d focused`; \
+	bspc desktop -m {prev,next}; \
+	bspc monitor -f {prev,next}; \
+	bspc desktop -f $desk
 
 ## focus or send to the given desktop
 alt + {_,shift + }{1-9,0}
