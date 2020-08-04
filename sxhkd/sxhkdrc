@@ -14,6 +14,7 @@ XF86AudioMicMute
 
 XF86Display
 	/usr/bin/arandr;\
+	sleep 5;\
 	$XDG_CONFIG_HOME/polybar/launch.sh
 #
 # Circle monitors (affects the desktop indices)
